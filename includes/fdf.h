@@ -6,15 +6,15 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/10 12:07:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:38:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
-
+# include <mlx.h>
 
 #endif
