@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:08:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/11 23:54:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 03:07:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**free_tab(char **tab, int index_word)
 	return (NULL);
 }
 
-char	**alloc_tab(char const *s, char c)
+char	**alloc_tab(char const *s, char *skip)
 {
 	int		i;
 	int		j;
@@ -36,11 +36,11 @@ char	**alloc_tab(char const *s, char c)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		while (s[i] == c && s[i] != '\0')
+		while (ft_is_in_str(skip, s[i]) && s[i] != '\0')
 			i++;
-		if (s[i] != c && s[i] != '\0')
+		if (!ft_is_in_str(skip, s[i]) && s[i] != '\0')
 			j++;
-		while (s[i] != c && s[i] != '\0')
+		while (!ft_is_in_str(skip, s[i]) && s[i] != '\0')
 			i++;
 	}
 	res = malloc((j + 1) * sizeof(char *));
@@ -49,7 +49,7 @@ char	**alloc_tab(char const *s, char c)
 	return (res);
 }
 
-char	*get_word(char const *s, char c, int i)
+char	*get_word(char const *s, char *skip, int i)
 {
 	int		j;
 	int		len_word;
@@ -57,7 +57,7 @@ char	*get_word(char const *s, char c, int i)
 
 	j = 0;
 	len_word = 0;
-	while (s[i + len_word] != c && s[i + len_word] != '\0')
+	while (!ft_is_in_str(skip, s[i + len_word]) && s[i + len_word] != '\0')
 		len_word++;
 	res = malloc((len_word + 1) * sizeof(char));
 	if (!res)
@@ -72,14 +72,14 @@ char	*get_word(char const *s, char c, int i)
 	return (res);
 }
 
-int	skip_char(const char *s, char c, int i)
+int	skip_char(const char *s, char *skip, int i)
 {
-	while (s[i] == c && s[i] != '\0')
+	while (ft_is_in_str(skip, s[i]) && s[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char *skip)
 {
 	char	**res;
 	int		i;
@@ -88,41 +88,20 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	index_word = 0;
-	res = alloc_tab(s, c);
+	res = alloc_tab(s, skip);
 	if (!res)
 		return (NULL);
-	i = skip_char(s, c, 0);
+	i = skip_char(s, skip, 0);
 	while (s[i] != '\0')
 	{
-		res[index_word] = get_word(s, c, i);
+		res[index_word] = get_word(s, skip, i);
 		if (!res[index_word])
 			return (free_tab(res, index_word));
-		while (s[i] != c && s[i] != '\0')
+		while (!ft_is_in_str(skip, s[i]) && s[i] != '\0')
 			i++;
-		i = skip_char(s, c, i);
+		i = skip_char(s, skip, i);
 		index_word++;
 	}
 	res[index_word] = NULL;
 	return (res);
 }
-
-/* #include <stdio.h>
-#include <malloc/malloc.h>
-int main()
-{
-	char **tab;
-	unsigned long sizetab;
-
-	void * p2 = malloc(sizeof(char *) * 2);
-	tab = ft_split("chinimala", ' ');
-	sizetab = sizeof(tab);
-	printf("size tab : %lu\n", malloc_size(tab));
-	printf("expected size : %lu\nTAB :\n", malloc_size(p2));
-	int i = 0;
-	while (tab[i] != NULL)
-	{
-		printf("%s\n",tab[i]);
-		i++;
-	}
-	printf("%s\n",tab[i]);
-} */

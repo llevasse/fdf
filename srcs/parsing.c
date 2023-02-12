@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 02:42:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 03:15:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_point	***parse_points(int fd)
 		points[i] = malloc((data.elem_per_line + 1) * sizeof(t_point));
 		if (!points[i])
 			return (NULL);
-		while (j < data.elem_per_line)
+		while (j < (data.elem_per_line - 1))
 		{
 			points[i][j] = init_point(i, j,
 					ft_atoi((const char *)*data.line++));
@@ -115,7 +115,7 @@ char	**get_parse_data(int *nb_line, int *len, int fd)
 		line = ft_strjoin(line, temp);
 		(*nb_line)++;
 	}
-	elems = ft_split(line, ' ');
+	elems = ft_split(line, " \n");
 	if (elems)
 		*len = (get_nb_of_element_in_array(elems)) / *nb_line;
 	return (elems);

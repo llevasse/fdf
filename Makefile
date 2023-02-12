@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/12 02:19:13 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/12 03:06:33 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ LIBFT_FILES		=	libft/ft_putstr_fd.c \
 					libft/gnl/get_next_line_utils_bonus.c \
 					libft/ft_printf/ft_printf_utils.c \
 					libft/ft_printf/ft_printf.c \
+					libft/ft_is_in_str.c \
 
 OBJS			=	${FILES:.c=.o} ${LIBFT_FILES:.c=.o}
 
