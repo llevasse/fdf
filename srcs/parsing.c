@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 01:13:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 01:53:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,34 @@
 
 t_point	***parse_points(int fd)
 {
-	int		i;
-	int		j;
-	char	**line;
-	int		nb_line;
-	int		len;
-	t_point	***points;
+	int				i;
+	int				j;
+	t_parse_data	data;
+	t_point			***points;
 
-	line = get_parse_data(&nb_line, &len, fd);
-	points = malloc(nb_line * sizeof(t_point));
+	data.line = get_parse_data(&data.nb_line, &data.elem_per_line, fd);
+	points = malloc((data.nb_line + 1) * sizeof(t_point));
 	if (!points)
 		return (NULL);
-	ft_printf("nb_line : %i\nnb_elem per line : %i\n", nb_line, len);
+	ft_printf("nb_line : %i\nnb_elem per line : %i\n", data.nb_line, data.elem_per_line);
 	i = 0;
-	while (i < nb_line)
+	while (i < data.nb_line)
 	{
 		j = 0;
-		points[i] = malloc(len * sizeof(t_point));
-		while (j < len)
+		points[i] = malloc((data.elem_per_line + 1) * sizeof(t_point));
+		if (!points[i])
+			return (NULL);
+		while (j < data.elem_per_line)
 		{
-			points[i][j] = init_point(i, j, ft_atoi((const char *)*line++));
+			points[i][j] = init_point(i, j, ft_atoi((const char *)*data.line++));
+			if (!points[i][j])
+				return (NULL);
 			j++;
-		}		
+		}
+		points[i][j] = NULL;
 		i++;
 	}
-
+	points[i] = NULL;
 	return (points);
 }
 

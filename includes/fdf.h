@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 01:08:13 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 01:48:10 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef struct s_point
 	struct s_point	*above_point;
 	struct s_point	*below_point;
 }	t_point;
+
+typedef struct s_parse_data
+{
+	int		elem_per_line;
+	int		nb_line;
+	char	**line;
+}	t_parse_data;
 
 t_point	***parse_points(int fd);
 t_point	*init_point(int x, int y, int value);
