@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"libft.h": "c",
+		"fdf.h": "c",
+		"array": "c",
+		"memory": "c",
+		"functional": "c",
+		"tuple": "c",
+		"utility": "c"
+	}
+}

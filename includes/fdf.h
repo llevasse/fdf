@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 01:48:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 02:33:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ t_point	***parse_points(int fd);
 t_point	*init_point(int x, int y, int value);
 char	**get_parse_data(int *nb_line, int *len, int fd);
 int		get_nb_of_element_in_array(char **str);
+
+void	connect_points(t_point ***points, t_parse_data data);
+void	add_right_point(t_point ***points, int i, int j, t_parse_data data);
+void	add_left_point(t_point ***points, int i, int j, t_parse_data data);
+void	add_above_point(t_point ***points, int i, int j);
+void	add_below_point(t_point ***points, int i, int j, t_parse_data data);
 
 
 #endif
