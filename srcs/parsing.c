@@ -6,31 +6,38 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 00:56:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 01:13:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_point	**parse_points(int fd)
+t_point	***parse_points(int fd)
 {
 	int		i;
 	int		j;
 	char	**line;
 	int		nb_line;
 	int		len;
-	t_point	**points;
+	t_point	***points;
 
 	line = get_parse_data(&nb_line, &len, fd);
 	points = malloc(nb_line * sizeof(t_point));
+	if (!points)
+		return (NULL);
 	ft_printf("nb_line : %i\nnb_elem per line : %i\n", nb_line, len);
-
-	(void)i;
-	(void)j;
-	(void)line;
-	(void)nb_line;
-	(void)len;
-	(void)points;
+	i = 0;
+	while (i < nb_line)
+	{
+		j = 0;
+		points[i] = malloc(len * sizeof(t_point));
+		while (j < len)
+		{
+			points[i][j] = init_point(i, j, ft_atoi((const char *)*line++));
+			j++;
+		}		
+		i++;
+	}
 
 	return (points);
 }
@@ -70,7 +77,7 @@ int	get_nb_of_element_in_array(char **str)
 	return (i);
 }
 
-t_point	*init_point(int x, int y)
+t_point	*init_point(int x, int y, int value)
 {
 	struct s_point	*new_el;
 
@@ -79,5 +86,6 @@ t_point	*init_point(int x, int y)
 		return (NULL);
 	new_el->x = x;
 	new_el->y = y;
+	new_el->value = value;
 	return (new_el);
 }

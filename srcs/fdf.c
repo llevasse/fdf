@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 00:30:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/12 01:11:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ int	render(t_data *data)
 int	main(int argc, char *argv[])
 {
 	t_data	data;
-	t_point	**points;
+	t_point	***points;
 	int		fd;
 
 	if (argc == 1)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
 	points = parse_points(fd);
+	ft_printf("value at x = 3 y = 3 : %i\n", points[0][0]->value);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
