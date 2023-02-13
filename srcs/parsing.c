@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 21:44:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:49:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ t_point	*init_point(int x, int y, int value, t_parse_data data)
 	new_el = malloc(sizeof(struct s_point));
 	if (!new_el)
 		return (NULL);
-	point_x_spacing = (WINDOW_HEIGHT / 3) / data.nb_line;
-	point_y_spacing = (WINDOW_WIDTH / 3) / data.elem_per_line;
-	new_el->x = (WINDOW_HEIGHT / 3) + (x * point_x_spacing);
-	new_el->y = (WINDOW_WIDTH / 3) + (y * point_y_spacing);
+	point_x_spacing = (WINDOW_WIDTH / 3) / data.nb_line;
+	point_y_spacing = (WINDOW_HEIGHT / 3) / data.elem_per_line;
+	new_el->x = (WINDOW_WIDTH / 3) + (x * point_x_spacing);
+	new_el->y = (WINDOW_HEIGHT / 3) + (y * point_y_spacing);
 	new_el->value = value;
 	new_el->color = WHITE;
 	new_el->left_point = NULL;

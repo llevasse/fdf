@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 21:36:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:50:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_line(t_data *data, t_line *line)
 
 	x = line->xA;
 	y = line->yA;
-	while (x < line->xB)
+	while (x < line->xB || y < line->yB)
 	{
 		img_pix_put(&data->img, x, y, WHITE);
 		x += line->x_increment;
