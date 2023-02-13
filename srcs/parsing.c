@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 18:21:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:44:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_point	***parse_points(t_parse_data data)
 		while (j < (data.elem_per_line - 1))
 		{
 			points[i][j] = init_point(i, j,
-					ft_atoi((const char *)*data.line++));
+					ft_atoi((const char *)*data.line++), data);
 			if (!points[i][j])
 				return (clear_point(points), NULL);
 			j++;
@@ -42,9 +42,6 @@ t_point	***parse_points(t_parse_data data)
 	points[i] = NULL;
 	clear_split(data.line - (i * j));
 	connect_points(points, data);
-	ft_printf("value at 0:0 : %i\n", points[0][0]->value);
-	ft_printf("value below : %i\n", points[0][0]->below_point->value);
-	ft_printf("value right : %i\n", points[0][0]->right_point->value);
 	return (points);
 }
 
@@ -84,15 +81,19 @@ int	get_nb_of_element_in_array(char **str)
 	return (i);
 }
 
-t_point	*init_point(int x, int y, int value)
+t_point	*init_point(int x, int y, int value, t_parse_data data)
 {
+	int				point_x_spacing;
+	int				point_y_spacing;
 	struct s_point	*new_el;
 
 	new_el = malloc(sizeof(struct s_point));
 	if (!new_el)
 		return (NULL);
-	new_el->x = x;
-	new_el->y = y;
+	point_x_spacing = (WINDOW_HEIGHT / 3) / data.nb_line;
+	point_y_spacing = (WINDOW_WIDTH / 3) / data.elem_per_line;
+	new_el->x = (WINDOW_HEIGHT / 3) + (x * point_x_spacing);
+	new_el->y = (WINDOW_WIDTH / 3) + (y * point_y_spacing);
 	new_el->value = value;
 	new_el->color = WHITE;
 	new_el->left_point = NULL;

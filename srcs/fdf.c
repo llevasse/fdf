@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 18:24:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:29:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	render(t_data *data)
 		return (1);
 	while (*data->lines)
 	{
-		draw_line(data, data->lines);
-		*data->lines++;
+		draw_line(data, *data->lines);
+		data->lines++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.mlx_img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 18:24:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 21:41:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_parse_data
 
 
 t_point	***parse_points(t_parse_data data);
-t_point	*init_point(int x, int y, int value);
+t_point	*init_point(int x, int y, int value, t_parse_data data);
 char	**get_parse_data(int *nb_line, int *len, int fd);
 int		get_nb_of_element_in_array(char **str);
 
