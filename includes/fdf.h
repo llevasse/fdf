@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 02:33:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:22:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-}	t_data;
 
 typedef struct s_point
 {
@@ -49,6 +43,14 @@ typedef struct s_point
 	struct s_point	*above_point;
 	struct s_point	*below_point;
 }	t_point;
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_point	***points;
+	t_img	img;
+}	t_data;
 
 typedef struct s_parse_data
 {
@@ -67,6 +69,9 @@ void	add_right_point(t_point ***points, int i, int j, t_parse_data data);
 void	add_left_point(t_point ***points, int i, int j, t_parse_data data);
 void	add_above_point(t_point ***points, int i, int j);
 void	add_below_point(t_point ***points, int i, int j, t_parse_data data);
+
+void	clear_split(char **str);
+void	clear_point(t_point ***points);
 
 
 #endif

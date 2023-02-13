@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 02:29:58 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:30:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	handle_input(int keysym, t_data *data)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
+		clear_point(data->points);
 	}
 	return (0);
 }
@@ -58,13 +59,12 @@ int	render(t_data *data)
 int	main(int argc, char *argv[])
 {
 	t_data	data;
-	t_point	***points;
 	int		fd;
 
 	if (argc == 1)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
-	points = parse_points(fd);
+	data.points = parse_points(fd);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
@@ -82,6 +82,6 @@ int	main(int argc, char *argv[])
 
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
-	(void)points;
+	(void)data.points;
 	(void)fd;
 }

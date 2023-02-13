@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 03:15:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:25:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,75 +29,26 @@ t_point	***parse_points(int fd)
 		j = 0;
 		points[i] = malloc((data.elem_per_line + 1) * sizeof(t_point));
 		if (!points[i])
-			return (NULL);
+			return (clear_point(points), NULL);
 		while (j < (data.elem_per_line - 1))
 		{
 			points[i][j] = init_point(i, j,
 					ft_atoi((const char *)*data.line++));
 			if (!points[i][j])
-				return (NULL);
+				return (clear_point(points), NULL);
 			j++;
 		}
 		points[i][j] = NULL;
 		i++;
 	}
 	points[i] = NULL;
+	clear_split(data.line - (i * j));
 	connect_points(points, data);
 	ft_printf("value at 0:0 : %i\n", points[0][0]->value);
 	ft_printf("value below : %i\n", points[0][0]->below_point->value);
 	ft_printf("value right : %i\n", points[0][0]->right_point->value);
 	return (points);
 }
-
-void	connect_points(t_point ***points, t_parse_data data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (points[i])
-	{
-		j = 0;
-		while (points[i][j])
-		{
-			add_right_point(points, i, j, data);
-			add_left_point(points, i, j, data);
-			add_above_point(points, i, j);
-			add_below_point(points, i, j, data);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	add_right_point(t_point ***points, int i, int j, t_parse_data data)
-{
-	if (i > (data.nb_line - 1) || j >= (data.elem_per_line - 1))
-		return ;
-	points[i][j]->right_point = (points[i][j + 1]);
-}
-
-void	add_left_point(t_point ***points, int i, int j, t_parse_data data)
-{
-	if (i > (data.nb_line - 1) || j == 0)
-		return ;
-	points[i][j]->left_point = (points[i][j - 1]);
-}
-
-void	add_above_point(t_point ***points, int i, int j)
-{
-	if (i <= 0)
-		return ;
-	points[i][j]->above_point = (points[i - 1][j]);
-}
-
-void	add_below_point(t_point ***points, int i, int j, t_parse_data data)
-{
-	if (i >= (data.nb_line - 1))
-		return ;
-	points[i][j]->below_point = (points[i + 1][j]);
-}
-
 
 char	**get_parse_data(int *nb_line, int *len, int fd)
 {
@@ -113,12 +64,13 @@ char	**get_parse_data(int *nb_line, int *len, int fd)
 		if (!temp)
 			break ;
 		line = ft_strjoin(line, temp);
+		free(temp);
 		(*nb_line)++;
 	}
 	elems = ft_split(line, " \n");
 	if (elems)
 		*len = (get_nb_of_element_in_array(elems)) / *nb_line;
-	return (elems);
+	return (free(line), elems);
 }
 
 int	get_nb_of_element_in_array(char **str)

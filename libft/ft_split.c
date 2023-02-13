@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:08:31 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/12 03:07:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:13:34 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**free_tab(char **tab, int index_word)
 	free(tab);
 	return (NULL);
 }
-
+	
 char	**alloc_tab(char const *s, char *skip)
 {
 	int		i;
