@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 16:30:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:24:08 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	handle_input(int keysym, t_data *data)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
 		clear_point(data->points);
+		clear_line(data->lines);
 	}
 	return (0);
 }
@@ -50,7 +51,11 @@ int	render(t_data *data)
 {
 	if (!data->win_ptr)
 		return (1);
-	img_pix_put(&data->img, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WHITE);
+	while (*data->lines)
+	{
+		draw_line(data, data->lines);
+		*data->lines++;
+	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.mlx_img, 0, 0);
 	return (0);
@@ -58,13 +63,16 @@ int	render(t_data *data)
 
 int	main(int argc, char *argv[])
 {
-	t_data	data;
-	int		fd;
+	t_data			data;
+	t_parse_data	parsed_data;
+	int				fd;
 
 	if (argc == 1)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
-	data.points = parse_points(fd);
+	parsed_data.line = get_parse_data(&parsed_data.nb_line, &parsed_data.elem_per_line, fd);
+	data.points = parse_points(parsed_data);
+	data.lines = get_all_lines(data.points, parsed_data);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);

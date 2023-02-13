@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 16:22:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:24:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,25 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_line
+{
+	int	xA;
+	int	yA;
+	int	xB;
+	int	yB;
+	int	distance_x;
+	int	distance_y;
+	int	len;
+	int	x_increment;
+	int	y_increment;
+}	t_line;
 
 typedef struct s_point
 {
 	int				x;
 	int				y;
 	int				value;
+	int				color;
 	struct s_point	*left_point;
 	struct s_point	*right_point;
 	struct s_point	*above_point;
@@ -49,6 +62,7 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_point	***points;
+	t_line	**lines;
 	t_img	img;
 }	t_data;
 
@@ -59,10 +73,13 @@ typedef struct s_parse_data
 	char	**line;
 }	t_parse_data;
 
-t_point	***parse_points(int fd);
+
+t_point	***parse_points(t_parse_data data);
 t_point	*init_point(int x, int y, int value);
 char	**get_parse_data(int *nb_line, int *len, int fd);
 int		get_nb_of_element_in_array(char **str);
+
+void	img_pix_put(t_img *img, int x, int y, int color);
 
 void	connect_points(t_point ***points, t_parse_data data);
 void	add_right_point(t_point ***points, int i, int j, t_parse_data data);
@@ -73,5 +90,9 @@ void	add_below_point(t_point ***points, int i, int j, t_parse_data data);
 void	clear_split(char **str);
 void	clear_point(t_point ***points);
 
+t_line	**get_all_lines(t_point ***points, t_parse_data data);
+t_line	*init_line(t_point *point_a, t_point *point_b);
+void	draw_line(t_data *data, t_line *line);
+void	clear_line(t_line **line);
 
 #endif

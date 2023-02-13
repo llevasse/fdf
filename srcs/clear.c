@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 16:28:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:12:52 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ void	clear_point(t_point ***points)
 	}
 	free(points);
 	points = NULL;
+}
+
+void	clear_line(t_line **line)
+{
+	while (*line)
+	{
+		free(*line);
+		line = NULL;
+	}
+	free(line);
+	line = NULL;
 }

@@ -6,20 +6,18 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 16:25:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:21:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_point	***parse_points(int fd)
+t_point	***parse_points(t_parse_data data)
 {
 	int				i;
 	int				j;
-	t_parse_data	data;
 	t_point			***points;
 
-	data.line = get_parse_data(&data.nb_line, &data.elem_per_line, fd);
 	points = malloc((data.nb_line + 1) * sizeof(t_point));
 	if (!points)
 		return (NULL);
@@ -96,6 +94,7 @@ t_point	*init_point(int x, int y, int value)
 	new_el->x = x;
 	new_el->y = y;
 	new_el->value = value;
+	new_el->color = WHITE;
 	new_el->left_point = NULL;
 	new_el->right_point = NULL;
 	new_el->above_point = NULL;
