@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 19:43:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:38:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,23 @@ int	get_nb_of_element_in_array(char **str)
 
 t_point	*init_point(int x, int y, int value, t_parse_data data)
 {
-	int				point_x_spacing;
-	int				point_y_spacing;
+	int				x_spacing;
+	int				y_spacing;
+	int				begining_x;
+	int				begining_y;
 	struct s_point	*new_el;
 
 	new_el = malloc(sizeof(struct s_point));
 	if (!new_el)
 		return (NULL);
-	point_x_spacing = (WINDOW_WIDTH / 3) / data.nb_line;
-	point_y_spacing = (WINDOW_HEIGHT / 3) / data.elem_per_line;
-	new_el->place_in_tab_x = x;
-	new_el->place_in_tab_y = y;
-	new_el->x = (WINDOW_WIDTH / 3) + (x * point_x_spacing);
-	new_el->y = (WINDOW_HEIGHT / 3) + (y * point_y_spacing);
+	x_spacing = 10;
+	y_spacing = 10;
+	begining_x = (WINDOW_WIDTH / 2) - (x_spacing * (data.nb_line / 2));
+	begining_y = (WINDOW_HEIGHT / 2) - (y_spacing * (data.elem_per_line / 2));
+	new_el->tab_x = x;
+	new_el->tab_y = y;
+	new_el->x = (begining_x) + (x * x_spacing);
+	new_el->y = (begining_y) + (y * y_spacing);
 	new_el->value = value;
 	new_el->color = WHITE;
 	new_el->left_point = NULL;

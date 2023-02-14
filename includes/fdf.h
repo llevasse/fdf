@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 21:01:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:30:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <mlx.h>
 # include <X11/keysym.h>
 
-# define WINDOW_WIDTH 1220
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 720
+# define WINDOW_HEIGHT 576
 
 # define WHITE 0xffffff
 
@@ -48,8 +48,8 @@ typedef struct s_line
 
 typedef struct s_point
 {
-	int				place_in_tab_x;
-	int				place_in_tab_y;
+	int				tab_x;
+	int				tab_y;
 	int				x;
 	int				y;
 	int				value;
