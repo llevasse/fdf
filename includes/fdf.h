@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 20:17:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:01:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ typedef struct s_img
 
 typedef struct s_line
 {
-	int	xA;
-	int	yA;
-	int	xB;
-	int	yB;
+	int	line_id;
+	int	x_a;
+	int	y_a;
+	int	x_b;
+	int	y_b;
 	int	distance_x;
 	int	distance_y;
 	int	len;
@@ -97,7 +98,7 @@ void	clear_point(t_point ***points, t_parse_data data);
 void	clear_line(t_line **line, t_parse_data data);
 
 t_line	**get_all_lines(t_point ***points, t_parse_data data);
-t_line	*init_line(t_point *point_a, t_point *point_b);
+t_line	*init_line(t_point *point_a, t_point *point_b, int line_id);
 void	draw_line(t_data *data, t_line *line);
 
 #endif

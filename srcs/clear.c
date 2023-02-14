@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 20:38:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 21:06:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,23 @@ void	clear_point(t_point ***points, t_parse_data data)
 
 void	clear_line(t_line **line, t_parse_data data)
 {
-	line -= (data.elem_per_line * data.nb_line) / 2;
+	int	i;
+
+	i = 1;
+	line--;
+	while ((*line)->line_id != 0 || !(*line))
+	{
+		line--;
+		i++;
+	}
 	while (*line)
 	{
 		free(*line);
 		*(line)++ = NULL;
 	}
 	free (*line);
- 	line -= ((data.nb_line * data.elem_per_line) / 2);
+	line -= i;
 	free (line);
 	line = NULL;
+	(void)data;
 }
