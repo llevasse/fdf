@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 21:49:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 19:43:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ t_point	***parse_points(t_parse_data data)
 		j = 0;
 		points[i] = malloc((data.elem_per_line + 1) * sizeof(t_point));
 		if (!points[i])
-			return (clear_point(points), NULL);
+			return (clear_point(points, data), NULL);
 		while (j < (data.elem_per_line - 1))
 		{
 			points[i][j] = init_point(i, j,
 					ft_atoi((const char *)*data.line++), data);
 			if (!points[i][j])
-				return (clear_point(points), NULL);
+				return (clear_point(points, data), NULL);
+			points[i][j]->nb_line = data.nb_line;
+			points[i][j]->elem_per_line = data.elem_per_line;
 			j++;
 		}
 		points[i][j] = NULL;
@@ -92,6 +94,8 @@ t_point	*init_point(int x, int y, int value, t_parse_data data)
 		return (NULL);
 	point_x_spacing = (WINDOW_WIDTH / 3) / data.nb_line;
 	point_y_spacing = (WINDOW_HEIGHT / 3) / data.elem_per_line;
+	new_el->place_in_tab_x = x;
+	new_el->place_in_tab_y = y;
 	new_el->x = (WINDOW_WIDTH / 3) + (x * point_x_spacing);
 	new_el->y = (WINDOW_HEIGHT / 3) + (y * point_y_spacing);
 	new_el->value = value;

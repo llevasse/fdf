@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 21:50:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:17:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ t_line	**get_all_lines(t_point ***points, t_parse_data data)
 			{
 				line[i++] = init_line(**points, (**points)->right_point);
 				if (!line[i - 1])
-					return (clear_line(line), NULL);
+					return (clear_line(line, data), NULL);
 			}
 			if ((**points)->below_point && **points)
 			{
 				line[i++] = init_line(**points, (**points)->below_point);
 				if (!line[i - 1])
-					return (clear_line(line), NULL);
+					return (clear_line(line, data), NULL);
 			}
 			(*points)++;
 		}

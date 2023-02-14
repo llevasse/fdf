@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 21:41:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:17:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,19 @@ typedef struct s_line
 
 typedef struct s_point
 {
+	int				place_in_tab_x;
+	int				place_in_tab_y;
 	int				x;
 	int				y;
 	int				value;
 	int				color;
+	int				nb_line;
+	int				elem_per_line;
 	struct s_point	*left_point;
 	struct s_point	*right_point;
 	struct s_point	*above_point;
 	struct s_point	*below_point;
 }	t_point;
-
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_point	***points;
-	t_line	**lines;
-	t_img	img;
-}	t_data;
 
 typedef struct s_parse_data
 {
@@ -72,6 +67,16 @@ typedef struct s_parse_data
 	int		nb_line;
 	char	**line;
 }	t_parse_data;
+
+typedef struct s_data
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+	t_point			***points;
+	t_line			**lines;
+	t_parse_data	parsed_data;
+	t_img			img;
+}	t_data;
 
 
 t_point	***parse_points(t_parse_data data);
@@ -88,11 +93,11 @@ void	add_above_point(t_point ***points, int i, int j);
 void	add_below_point(t_point ***points, int i, int j, t_parse_data data);
 
 void	clear_split(char **str);
-void	clear_point(t_point ***points);
+void	clear_point(t_point ***points, t_parse_data data);
+void	clear_line(t_line **line, t_parse_data data);
 
 t_line	**get_all_lines(t_point ***points, t_parse_data data);
 t_line	*init_line(t_point *point_a, t_point *point_b);
 void	draw_line(t_data *data, t_line *line);
-void	clear_line(t_line **line);
 
 #endif

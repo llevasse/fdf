@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 18:12:52 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:38:21 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,36 @@ void	clear_split(char **str)
 	str = NULL;
 }
 
-void	clear_point(t_point ***points)
+void	clear_point(t_point ***points, t_parse_data data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (points[i])
+	*points -= (data.elem_per_line - 1);
+	while (*points)
 	{
-		j = 0;
-		while (points[i][j])
+		while (**points)
 		{
-			free(points[i][j]);
-			points[i][j++] = NULL;
+			free(**points);
+			*(*points)++ = NULL;
 		}
-		free (points[i]);
-		points[i++] = NULL;
+		free (**points);
+		*points -= (data.elem_per_line - 1);
+		free (*points);
+		*(points)++ = NULL;
 	}
-	free(points);
+	points -= (data.nb_line);
+	free (points);
 	points = NULL;
 }
 
-void	clear_line(t_line **line)
+void	clear_line(t_line **line, t_parse_data data)
 {
+	line -= (data.elem_per_line * data.nb_line) / 2;
 	while (*line)
 	{
 		free(*line);
-		line = NULL;
+		*(line)++ = NULL;
 	}
-	free(line);
+	free (*line);
+ 	line -= ((data.nb_line * data.elem_per_line) / 2);
+	free (line);
 	line = NULL;
 }
