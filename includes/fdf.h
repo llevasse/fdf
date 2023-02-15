@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 16:43:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:33:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define WHITE 0xffffff
 # define RED 0xff0000
+# define PI 3.142857
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -34,13 +36,14 @@ typedef struct s_img
 
 typedef struct s_grid
 {
-	int	zoom;
-	int	grid_height;
-	int	grid_width;
-	int	wire_len;
-	int	x_angle;
-	int	y_angle;
-	int	grid_z_rotation;
+	int		zoom;
+	int		grid_height;
+	int		grid_width;
+	int		wire_len;
+	int		x_angle;
+	int		y_angle;
+	int		grid_z_rotation;
+	double	radian_x;
 }	t_grid;
 
 typedef struct s_line

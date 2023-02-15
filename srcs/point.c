@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 11:24:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:33:53 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,18 @@ t_point	*init_point(int x, int y, int value, t_data data)
 	double			cos_angle;
 	double			sin_angle;
 	struct s_point	*new_el;
+
 	new_el = malloc(sizeof(struct s_point));
 	if (!new_el)
 		return (NULL);
-	begining_x = data.grid.grid_width - (data.grid.wire_len * (data.nb_line / 2));
-	begining_y = data.grid.grid_height - (data.grid.wire_len * (data.elem_per_line / 2));
+	begining_x = data.grid.grid_height - (data.grid.wire_len * (data.nb_line / 2));
+	begining_y = data.grid.grid_width - (data.grid.wire_len * (data.elem_per_line / 2));
 	new_el->tab_x = x;
 	new_el->tab_y = y;
 	new_el->x = (begining_x) + (x * data.grid.wire_len);
 	new_el->y = (begining_y) + (y * data.grid.wire_len);
-	cos_angle = cos(data.grid.x_angle);
-	sin_angle = sin(data.grid.x_angle);
+	cos_angle = cos(data.grid.radian_x);
+	sin_angle = sin(data.grid.radian_x);
 	new_el->rotated_x = (int)((new_el->x) * cos_angle) - ((new_el->y) * sin_angle);
 	new_el->rotated_y = (int)((new_el->x) * sin_angle) + ((new_el->y) * cos_angle);
 	new_el->value = value;
