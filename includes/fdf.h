@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 11:18:27 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:19:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <mlx.h>
 # include <X11/keysym.h>
 # include <math.h>
-# define WINDOW_WIDTH 720
-# define WINDOW_HEIGHT 576
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 
 # define WHITE 0xffffff
 
@@ -115,7 +115,7 @@ void			clear_line(t_data data);
 /* line.c */
 t_line			**get_all_lines(t_data data);
 t_line			*init_line(t_point *point_a, t_point *point_b, int line_id);
-void			draw_line(t_data *data, t_line *line);
+void			draw_line(t_data *data, t_line *line, int decide);
 
 /* grid.c */
 t_grid			init_grid(void);

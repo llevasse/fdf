@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 11:14:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:13:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,43 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	return (line);
 }
 
-void	draw_line(t_data *data, t_line *line)
+void	draw_line(t_data *data, t_line *line, int decide)
 {	
+	int	pk;
 	int	x;
 	int	y;
+	int	i;
 
 	x = line->x_a;
 	y = line->y_a;
-	while (x < line->x_b || y < line->y_b)
+	pk = 2 * line->distance_y - line->distance_x;
+	i = 0;
+	while (i <= line->distance_x)
 	{
-		img_pix_put(&data->img, x, y, WHITE);
-		x += line->x_increment;
-		y += line->y_increment;
+		if (x < line->x_b)
+			x++;
+		else
+			x--;
+		if (pk < 0)
+		{
+			if (!decide)
+				img_pix_put(&data->img, x, y, WHITE);
+			else
+				img_pix_put(&data->img, y, x, WHITE);
+			pk = pk + 2 * line->distance_y;
+		}
+		else
+		{
+			if (y < line->y_b)
+				y++;
+			else
+				y--;
+			if (!decide)
+				img_pix_put(&data->img, x, y, WHITE);
+			else
+				img_pix_put(&data->img, y, x, WHITE);
+			pk = pk + 2 * line->distance_y - 2 * line->distance_x;
+		}
+		i++;
 	}
 }
