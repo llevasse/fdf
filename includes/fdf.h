@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 16:29:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:43:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WINDOW_HEIGHT 1080
 
 # define WHITE 0xffffff
-
+# define RED 0xff0000
 typedef struct s_img
 {
 	void	*mlx_img;
