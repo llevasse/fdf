@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 21:30:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:00:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }	t_img;
+
+typedef struct s_grid_settings
+{
+	int	zoom;
+	int	grid_height;
+	int	grid_width;
+	int	grid_wire_len;
+	int	grid_x_rotation;
+	int	grid_y_rotation;
+	int	grid_z_rotation;
+}	t_grid_settings;
 
 typedef struct s_line
 {
@@ -75,28 +86,36 @@ typedef struct s_data
 	void			*win_ptr;
 	t_point			***points;
 	t_line			**lines;
+	t_grid_settings	grid_settings;
 	t_parse_data	parsed_data;
 	t_img			img;
 }	t_data;
 
+/* fdf.c */
+int		handle_no_event(void *data);
+int		handle_input(int keysym, t_data *data);
+void	img_pix_put(t_img *img, int x, int y, int color);
+int		render(t_data *data);
 
+/* parsing.c */
 t_point	***parse_points(t_parse_data data);
 t_point	*init_point(int x, int y, int value, t_parse_data data);
 char	**get_parse_data(int *nb_line, int *len, int fd);
 int		get_nb_of_element_in_array(char **str);
 
-void	img_pix_put(t_img *img, int x, int y, int color);
-
+/* connect.c */
 void	connect_points(t_point ***points, t_parse_data data);
 void	add_right_point(t_point ***points, int i, int j, t_parse_data data);
 void	add_left_point(t_point ***points, int i, int j, t_parse_data data);
 void	add_above_point(t_point ***points, int i, int j);
 void	add_below_point(t_point ***points, int i, int j, t_parse_data data);
 
+/* clear.c */
 void	clear_split(char **str);
 void	clear_point(t_point ***points, t_parse_data data);
 void	clear_line(t_line **line, t_parse_data data);
 
+/* line.c */
 t_line	**get_all_lines(t_point ***points, t_parse_data data);
 t_line	*init_line(t_point *point_a, t_point *point_b, int line_id);
 void	draw_line(t_data *data, t_line *line);
