@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:55:21 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 12:28:22 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:35:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_grid	init_grid(void)
 {
 	struct s_grid	grid;
 
-	grid.wire_len = 10;
+	grid.wire_len = 30;
 	grid.grid_height = WINDOW_HEIGHT / 2;
 	grid.grid_width = WINDOW_WIDTH / 2;
-	grid.x_angle = 90;
+	grid.x_angle = 0;
 	grid.y_angle = 0;
 	grid.grid_z_rotation = 0;
 	grid.zoom = 1;

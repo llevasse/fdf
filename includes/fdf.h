@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 12:19:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:29:05 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void			clear_line(t_data data);
 /* line.c */
 t_line			**get_all_lines(t_data data);
 t_line			*init_line(t_point *point_a, t_point *point_b, int line_id);
-void			draw_line(t_data *data, t_line *line, int decide);
+void			draw_line(t_data *data, t_line *line);
 
 /* grid.c */
 t_grid			init_grid(void);

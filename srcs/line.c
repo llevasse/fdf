@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 12:13:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:28:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	line->x_b = point_b->rotated_x;
 	line->y_b = point_b->rotated_y;
 	line->line_id = line_id;
-	line->distance_x = abs(point_a->rotated_x - point_b->rotated_x);
-	line->distance_y = abs(point_a->rotated_y - point_b->rotated_y);
+	line->distance_x = abs(point_b->rotated_x - point_a->rotated_x);
+	line->distance_y = abs(point_b->rotated_y - point_a->rotated_y);
 	if (abs(line->distance_x) > abs(line->distance_y))
 		line->len = abs(line->distance_x);
 	else
@@ -64,7 +64,7 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	return (line);
 }
 
-void	draw_line(t_data *data, t_line *line, int decide)
+void	draw_line(t_data *data, t_line *line)
 {	
 	int	pk;
 	int	x;
@@ -83,10 +83,7 @@ void	draw_line(t_data *data, t_line *line, int decide)
 			x--;
 		if (pk < 0)
 		{
-			if (!decide)
-				img_pix_put(&data->img, x, y, WHITE);
-			else
-				img_pix_put(&data->img, y, x, WHITE);
+			img_pix_put(&data->img, x, y, WHITE);
 			pk = pk + 2 * line->distance_y;
 		}
 		else
@@ -95,10 +92,7 @@ void	draw_line(t_data *data, t_line *line, int decide)
 				y++;
 			else
 				y--;
-			if (!decide)
-				img_pix_put(&data->img, x, y, WHITE);
-			else
-				img_pix_put(&data->img, y, x, WHITE);
+			img_pix_put(&data->img, x, y, WHITE);
 			pk = pk + 2 * line->distance_y - 2 * line->distance_x;
 		}
 		i++;
