@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 21:38:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:21:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_point	***parse_points(t_parse_data data)
+t_point	***parse_points(t_data data)
 {
 	int				i;
 	int				j;
@@ -27,13 +27,13 @@ t_point	***parse_points(t_parse_data data)
 		j = 0;
 		points[i] = malloc((data.elem_per_line + 1) * sizeof(t_point));
 		if (!points[i])
-			return (clear_point(points, data), NULL);
+			return (clear_point(data), NULL);
 		while (j < (data.elem_per_line - 1))
 		{
 			points[i][j] = init_point(i, j,
 					ft_atoi((const char *)*data.line++), data);
 			if (!points[i][j])
-				return (clear_point(points, data), NULL);
+				return (clear_point(data), NULL);
 			points[i][j]->nb_line = data.nb_line;
 			points[i][j]->elem_per_line = data.elem_per_line;
 			j++;
@@ -47,7 +47,7 @@ t_point	***parse_points(t_parse_data data)
 	return (points);
 }
 
-char	**get_parse_data(int *nb_line, int *len, int fd)
+char	**get_data(int *nb_line, int *len, int fd)
 {
 	char	*line;
 	char	*temp;
@@ -83,7 +83,7 @@ int	get_nb_of_element_in_array(char **str)
 	return (i);
 }
 
-t_point	*init_point(int x, int y, int value, t_parse_data data)
+t_point	*init_point(int x, int y, int value, t_data data)
 {
 	int				x_spacing;
 	int				y_spacing;

@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:03:47 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/13 17:53:06 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:13:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	connect_points(t_point ***points, t_parse_data data)
+void	connect_points(t_point ***points, t_data data)
 {
 	int	i;
 	int	j;
@@ -33,14 +33,14 @@ void	connect_points(t_point ***points, t_parse_data data)
 	}
 }
 
-void	add_right_point(t_point ***points, int i, int j, t_parse_data data)
+void	add_right_point(t_point ***points, int i, int j, t_data data)
 {
 	if (i > (data.nb_line - 1) || j >= (data.elem_per_line - 1))
 		return ;
 	points[i][j]->right_point = (points[i][j + 1]);
 }
 
-void	add_left_point(t_point ***points, int i, int j, t_parse_data data)
+void	add_left_point(t_point ***points, int i, int j, t_data data)
 {
 	if (i > (data.nb_line - 1) || j == 0)
 		return ;
@@ -54,7 +54,7 @@ void	add_above_point(t_point ***points, int i, int j)
 	points[i][j]->above_point = (points[i - 1][j]);
 }
 
-void	add_below_point(t_point ***points, int i, int j, t_parse_data data)
+void	add_below_point(t_point ***points, int i, int j, t_data data)
 {
 	if (i >= (data.nb_line - 1))
 		return ;

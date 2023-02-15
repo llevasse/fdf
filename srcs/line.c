@@ -6,38 +6,38 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 21:01:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:21:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_line	**get_all_lines(t_point ***points, t_parse_data data)
+t_line	**get_all_lines(t_data data)
 {
 	struct s_line	**line;
 	int				i;
 
 	i = 0;
 	line = malloc(((data.elem_per_line * data.nb_line) / 2) * sizeof(struct s_line));
-	while (*points)
+	while (*data.points)
 	{
-		while (**points)
+		while (**data.points)
 		{
-			if ((**points)->right_point && **points)
+			if ((**data.points)->right_point && **data.points)
 			{
-				line[i] = init_line(**points, (**points)->right_point, i);
+				line[i] = init_line(**data.points, (**data.points)->right_point, i);
 				if (!line[i++])
-					return (clear_line(line, data), NULL);
+					return (clear_line(data), NULL);
 			}
-			if ((**points)->below_point && **points)
+			if ((**data.points)->below_point && **data.points)
 			{
-				line[i] = init_line(**points, (**points)->below_point, i);
+				line[i] = init_line(**data.points, (**data.points)->below_point, i);
 				if (!line[i++])
-					return (clear_line(line, data), NULL);
+					return (clear_line(data), NULL);
 			}
-			(*points)++;
+			(*data.points)++;
 		}
-		points++;
+		data.points++;
 	}
 	line[i] = NULL;
 	return (line);

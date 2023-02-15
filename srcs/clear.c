@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 21:06:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:21:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,45 +27,45 @@ void	clear_split(char **str)
 	str = NULL;
 }
 
-void	clear_point(t_point ***points, t_parse_data data)
+void	clear_point(t_data data)
 {
-	*points -= (data.elem_per_line - 1);
-	while (*points)
+	*data.points -= (data.elem_per_line - 1);
+	while (*data.points)
 	{
-		while (**points)
+		while (**data.points)
 		{
-			free(**points);
-			*(*points)++ = NULL;
+			free(**data.points);
+			*(*data.points)++ = NULL;
 		}
-		free (**points);
-		*points -= (data.elem_per_line - 1);
-		free (*points);
-		*(points)++ = NULL;
+		free (**data.points);
+		*data.points -= (data.elem_per_line - 1);
+		free (*data.points);
+		*(data.points)++ = NULL;
 	}
-	points -= (data.nb_line);
-	free (points);
-	points = NULL;
+	data.points -= (data.nb_line);
+	free (data.points);
+	data.points = NULL;
 }
 
-void	clear_line(t_line **line, t_parse_data data)
+void	clear_line(t_data data)
 {
 	int	i;
 
 	i = 1;
-	line--;
-	while ((*line)->line_id != 0 || !(*line))
+	data.lines--;
+	while ((*data.lines)->line_id != 0 || !(*data.lines))
 	{
-		line--;
+		data.lines--;
 		i++;
 	}
-	while (*line)
+	while (*data.lines)
 	{
-		free(*line);
-		*(line)++ = NULL;
+		free(*data.lines);
+		*(data.lines)++ = NULL;
 	}
-	free (*line);
-	line -= i;
-	free (line);
-	line = NULL;
+	free (*data.lines);
+	data.lines -= i;
+	free (data.lines);
+	data.lines = NULL;
 	(void)data;
 }

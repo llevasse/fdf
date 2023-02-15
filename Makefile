@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/13 17:08:39 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/15 10:16:48 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ FILES			=	srcs/fdf.c				\
 					srcs/connect.c			\
 					srcs/clear.c			\
 					srcs/line.c				\
+					srcs/grid.c				\
 
 LIBFT_FILES		=	libft/ft_putstr_fd.c \
 					libft/ft_strchr.c \

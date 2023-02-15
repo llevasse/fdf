@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/14 20:18:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:20:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	handle_input(int keysym, t_data *data)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		data->win_ptr = NULL;
-		clear_point(data->points, data->parsed_data);
-		clear_line(data->lines, data->parsed_data);
+		clear_point(*data);
+		clear_line(*data);
 	}
 	return (0);
 }
@@ -64,16 +64,15 @@ int	render(t_data *data)
 int	main(int argc, char *argv[])
 {
 	t_data			data;
-	t_parse_data	parsed_data;
 	int				fd;
 
 	if (argc == 1)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
-	parsed_data.line = get_parse_data(&parsed_data.nb_line, &parsed_data.elem_per_line, fd);
-	data.parsed_data = parsed_data;
-	data.points = parse_points(parsed_data);
-	data.lines = get_all_lines(data.points, parsed_data);
+	data.grid_settings = init_grid();
+	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
+	data.points = parse_points(data);
+	data.lines = get_all_lines(data);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);
