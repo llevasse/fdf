@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:03:47 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 10:13:41 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:44:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,39 @@ void	connect_points(t_point ***points, t_data data)
 void	add_right_point(t_point ***points, int i, int j, t_data data)
 {
 	if (i > (data.nb_line - 1) || j >= (data.elem_per_line - 1))
+	{
+		points[i][j]->right_point = NULL;
 		return ;
+	}	
 	points[i][j]->right_point = (points[i][j + 1]);
 }
 
 void	add_left_point(t_point ***points, int i, int j, t_data data)
 {
 	if (i > (data.nb_line - 1) || j == 0)
+	{
+		points[i][j]->left_point = NULL;
 		return ;
+	}	
 	points[i][j]->left_point = (points[i][j - 1]);
 }
 
 void	add_above_point(t_point ***points, int i, int j)
 {
 	if (i <= 0)
+	{
+		points[i][j]->above_point = NULL;
 		return ;
+	}	
 	points[i][j]->above_point = (points[i - 1][j]);
 }
 
 void	add_below_point(t_point ***points, int i, int j, t_data data)
 {
 	if (i >= (data.nb_line - 1))
+	{
+		points[i][j]->below_point = NULL;
 		return ;
+	}	
 	points[i][j]->below_point = (points[i + 1][j]);
 }

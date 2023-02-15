@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 17:33:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 23:13:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ int				render(t_data *data);
 
 /* point.c */
 t_point			***parse_points(t_data data);
-t_point			*init_point(int x, int y, int value, t_data data);
+t_point			*init_initial_point(int x, int y, t_data data);
 char			**get_data(int *nb_line, int *len, int fd);
 int				get_nb_of_element_in_array(char **str);
+void			get_rotated_point(t_data data, t_point *point, int *x, int *y);
+t_point			 *init_right_point(t_data data, t_point *left_point, int x, int y);
 
 /* connect.c */
 void			connect_points(t_point ***points, t_data data);
