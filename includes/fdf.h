@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 10:17:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:18:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <X11/keysym.h>
-
+# include <math.h>
 # define WINDOW_WIDTH 720
 # define WINDOW_HEIGHT 576
 
@@ -32,16 +32,16 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_grid_settings
+typedef struct s_grid
 {
 	int	zoom;
 	int	grid_height;
 	int	grid_width;
-	int	grid_wire_len;
-	int	grid_x_rotation;
-	int	grid_y_rotation;
+	int	wire_len;
+	int	x_angle;
+	int	y_angle;
 	int	grid_z_rotation;
-}	t_grid_settings;
+}	t_grid;
 
 typedef struct s_line
 {
@@ -63,6 +63,8 @@ typedef struct s_point
 	int				tab_y;
 	int				x;
 	int				y;
+	int				rotated_x;
+	int				rotated_y;
 	int				value;
 	int				color;
 	int				nb_line;
@@ -79,7 +81,7 @@ typedef struct s_data
 	void			*win_ptr;
 	t_point			***points;
 	t_line			**lines;
-	t_grid_settings	grid_settings;
+	t_grid			grid;
 	t_img			img;
 	int				elem_per_line;
 	int				nb_line;
@@ -92,7 +94,7 @@ int				handle_input(int keysym, t_data *data);
 void			img_pix_put(t_img *img, int x, int y, int color);
 int				render(t_data *data);
 
-/* parsing.c */
+/* point.c */
 t_point			***parse_points(t_data data);
 t_point			*init_point(int x, int y, int value, t_data data);
 char			**get_data(int *nb_line, int *len, int fd);
@@ -116,6 +118,6 @@ t_line			*init_line(t_point *point_a, t_point *point_b, int line_id);
 void			draw_line(t_data *data, t_line *line);
 
 /* grid.c */
-t_grid_settings	init_grid(void);
+t_grid			init_grid(void);
 
 #endif

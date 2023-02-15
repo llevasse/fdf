@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   point.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 10:21:01 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:24:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,24 @@ int	get_nb_of_element_in_array(char **str)
 
 t_point	*init_point(int x, int y, int value, t_data data)
 {
-	int				x_spacing;
-	int				y_spacing;
 	int				begining_x;
 	int				begining_y;
+	double			cos_angle;
+	double			sin_angle;
 	struct s_point	*new_el;
-
 	new_el = malloc(sizeof(struct s_point));
 	if (!new_el)
 		return (NULL);
-	x_spacing = 10;
-	y_spacing = 10;
-	begining_x = (WINDOW_WIDTH / 2) - (x_spacing * (data.nb_line / 2));
-	begining_y = (WINDOW_HEIGHT / 2) - (y_spacing * (data.elem_per_line / 2));
+	begining_x = data.grid.grid_width - (data.grid.wire_len * (data.nb_line / 2));
+	begining_y = data.grid.grid_height - (data.grid.wire_len * (data.elem_per_line / 2));
 	new_el->tab_x = x;
 	new_el->tab_y = y;
-	new_el->x = (begining_x) + (x * x_spacing);
-	new_el->y = (begining_y) + (y * y_spacing);
+	new_el->x = (begining_x) + (x * data.grid.wire_len);
+	new_el->y = (begining_y) + (y * data.grid.wire_len);
+	cos_angle = cos(data.grid.x_angle);
+	sin_angle = sin(data.grid.x_angle);
+	new_el->rotated_x = (int)((new_el->x) * cos_angle) - ((new_el->y) * sin_angle);
+	new_el->rotated_y = (int)((new_el->x) * sin_angle) + ((new_el->y) * cos_angle);
 	new_el->value = value;
 	new_el->color = WHITE;
 	new_el->left_point = NULL;

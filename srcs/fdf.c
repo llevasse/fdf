@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 10:20:01 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:47:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
-	data.grid_settings = init_grid();
+	data.grid = init_grid();
 	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
 	data.points = parse_points(data);
 	data.lines = get_all_lines(data);

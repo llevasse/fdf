@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 10:21:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:14:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	struct s_line	*line;
 
 	line = malloc(sizeof(struct s_line));
-	line->x_a = point_a->x;
-	line->y_a = point_a->y;
-	line->x_b = point_b->x;
-	line->y_b = point_b->y;
+	line->x_a = point_a->rotated_x;
+	line->y_a = point_a->rotated_y;
+	line->x_b = point_b->rotated_x;
+	line->y_b = point_b->rotated_y;
 	line->line_id = line_id;
-	line->distance_x = abs(point_a->x - point_b->x);
-	line->distance_y = abs(point_a->y - point_b->y);
+	line->distance_x = abs(point_a->rotated_x - point_b->rotated_x);
+	line->distance_y = abs(point_a->rotated_y - point_b->rotated_y);
 	if (abs(line->distance_x) > abs(line->distance_y))
 		line->len = abs(line->distance_x);
 	else

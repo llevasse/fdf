@@ -6,14 +6,14 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/15 10:16:48 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/15 11:11:03 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAGS			= -Wall -Werror -Wextra
 
 FILES			=	srcs/fdf.c				\
-					srcs/parsing.c			\
+					srcs/point.c			\
 					srcs/connect.c			\
 					srcs/clear.c			\
 					srcs/line.c				\
@@ -80,7 +80,7 @@ EXECUTABLE		=	fdf
 ${NAME}:		${OBJS}
 					cd	libft;	make libft.a; cd ..; 
 					ar rcs ${NAME} ${OBJS};
-					gcc ${NAME} -o ${EXECUTABLE}
+					gcc ${NAME} -o ${EXECUTABLE} -lm
 
 all:			${NAME}
 
@@ -105,7 +105,7 @@ run_vs_code: cleandebug alldebug
 	./bin/$(EXECUTABLE)
 
 bin/$(EXECUTABLE): ${FILES} ${LIBFT_FILES}
-					gcc ${FLAGS} -fsanitize=address -ggdb $^ -o $@ -lmlx -lXext -lX11 
+					gcc ${FLAGS} -fsanitize=address -ggdb $^ -o $@ -lmlx -lXext -lX11 -lm
 
 cleandebug:
 					-rm ./bin/*
