@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 16:44:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:31:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ void	draw_line(t_data *data, t_line *line)
 			x++;
 		else
 			x--;
-		if (x >= WINDOW_WIDTH)
-			break ;
 		if (pk < 0 && y >= 0)
 		{
-			img_pix_put(&data->img, x, y, color);
+			if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
+				img_pix_put(&data->img, x, y, color);
 			pk = pk + 2 * line->distance_y;
 		}
 		else
@@ -94,7 +93,7 @@ void	draw_line(t_data *data, t_line *line)
 				y++;
 			else
 				y--;
-			if (y >= 0 && y <= WINDOW_HEIGHT)
+			if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
 				img_pix_put(&data->img, x, y, color);
 			pk = pk + 2 * line->distance_y - 2 * line->distance_x;
 		}

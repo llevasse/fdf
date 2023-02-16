@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 19:18:15 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:35:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_point	***parse_points(t_data data)
 			return (clear_point(data), NULL);
 		while (j < data.elem_per_line)
 		{
-			points[i][j] = init_point(data, i, j);
+			points[i][j] = init_point(data, j, i);
 			if (!points[i][j])
 				return (clear_point(data), NULL);
 			points[i][j]->nb_line = data.nb_line;
@@ -57,13 +57,14 @@ t_point	*init_point(t_data data, int x, int y)
 	if (!new)
 		return (NULL);
  	beg_y = data.grid.grid_height - (data.grid.wire_len * (data.nb_line / 2));
+	new->tab_y = y;
+	new->y = beg_y + (y * data.grid.wire_len);
+	new->rotated_y = new->y;
+	
 	beg_x = data.grid.grid_width - (data.grid.wire_len * (data.elem_per_line / 2));
 	new->tab_x = x;
-	new->tab_y = y;
 	new->x = beg_x + (x * data.grid.wire_len);
-	new->y = beg_y + (y * data.grid.wire_len);
 	new->rotated_x = new->x;
-	new->rotated_y = new->y;
 	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y));	
 	return (new);
 }
