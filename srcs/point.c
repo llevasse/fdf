@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 18:58:30 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:18:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,16 @@ void	get_rotated_point(t_data data, int *x, int *y)
 	double	radian;
 	double	cos_rad;
 	double	sin_rad;
+	int		temp_x;
+	int		temp_y;
 
 	radian = data.grid.radian_x;
 	cos_rad = cos(radian);
 	sin_rad = sin(radian);
-	*x = (int)((*x * cos_rad) - (*y * sin_rad));
-	*y = (int)((*y * cos_rad) + (*x * sin_rad));
-}
+	temp_x = (int)(cos_rad * (*x - data.grid.grid_width)
+			- sin_rad * (*y - data.grid.grid_height) + data.grid.grid_width);
+	temp_y = (int)(sin_rad * (*x - data.grid.grid_width)
+			+ cos_rad * (*y - data.grid.grid_height) + data.grid.grid_height);
+	*x = temp_x;
+	*y = temp_y;
+ }
