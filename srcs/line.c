@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 17:12:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 00:58:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_line	**get_all_lines(t_data data)
 	int				i;
 
 	i = 0;
-	line = malloc(((data.elem_per_line * data.nb_line) / 2) * sizeof(struct s_line));
+	line = malloc(((data.elem_per_line * data.nb_line)) * sizeof(struct s_line));
 	while (*data.points)
 	{
 		while (**data.points)
@@ -55,12 +55,6 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	line->line_id = line_id;
 	line->distance_x = abs(point_b->rotated_x - point_a->rotated_x);
 	line->distance_y = abs(point_b->rotated_y - point_a->rotated_y);
-	if (abs(line->distance_x) > abs(line->distance_y))
-		line->len = abs(line->distance_x);
-	else
-		line->len = abs(line->distance_y);
-	line->x_increment = line->distance_x / line->len;
-	line->y_increment = line->distance_y / line->len;
 	return (line);
 }
 

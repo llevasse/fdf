@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 23:38:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:00:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ t_point *init_right_point(t_data data, t_point *left_point, int x, int y)
 	new = malloc(sizeof(struct s_point));
 	if (!new)
 		return (NULL);
-	beg_x = data.grid.grid_height - (data.grid.wire_len * (data.nb_line / 2));
-	beg_y = data.grid.grid_width - (data.grid.wire_len * (data.elem_per_line / 2));
+ 	beg_y = data.grid.grid_height - (data.grid.wire_len * (data.nb_line / 2));
+	beg_x = data.grid.grid_width - (data.grid.wire_len * (data.elem_per_line / 2));
 	new->tab_x = x;
 	new->tab_y = y;
 	new->x = (beg_x) + (x * data.grid.wire_len);
@@ -119,8 +119,8 @@ t_point	*init_initial_point(int x, int y, t_data data)
 		return (NULL);
 	new_el->color = WHITE;
 	
-	begining_x = data.grid.grid_height - (data.grid.wire_len * (data.nb_line / 2));
-	begining_y = data.grid.grid_width - (data.grid.wire_len * (data.elem_per_line / 2));
+	begining_x = data.grid.grid_width - (data.grid.wire_len * (data.elem_per_line / 2));
+	begining_y = data.grid.grid_height - (data.grid.wire_len * (data.nb_line / 2));
 	new_el->tab_x = x;
 	new_el->tab_y = y;
 	new_el->x = begining_x;

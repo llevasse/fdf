@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/15 16:29:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 01:05:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	handle_input(int keysym, t_data *data)
 		data->win_ptr = NULL;
 		clear_point(*data);
 		clear_line(*data);
+		clear_split(data->line);
 	}
 	return (0);
 }
