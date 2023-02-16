@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/16 15:22:38 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/16 15:50:41 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ fclean:			clean
 
 re:				fclean all
 
-VAR				= test_files/test.fdf
+VAR				= test_files/42.fdf
 
 alldebug:		bin/$(EXECUTABLE)
 

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 15:18:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:56:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ void	draw_line(t_data *data, t_line *line)
 	color = WHITE;
 	pk = 2 * line->distance_y - line->distance_x;
 	i = 0;
-	if (line->line_id == 0)
-		color = RED;
 	while (i <= line->distance_x || i <= line->distance_y)
 	{
 		if (x < line->x_b)
