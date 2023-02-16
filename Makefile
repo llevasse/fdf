@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/15 11:34:43 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/16 15:22:38 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ FILES			=	srcs/fdf.c				\
 					srcs/clear.c			\
 					srcs/line.c				\
 					srcs/grid.c				\
+					srcs/parsing_data.c		\
 
 LIBFT_FILES		=	libft/ft_putstr_fd.c \
 					libft/ft_strchr.c \
@@ -92,7 +93,7 @@ fclean:			clean
 
 re:				fclean all
 
-VAR				= test_files/42.fdf
+VAR				= test_files/test.fdf
 
 alldebug:		bin/$(EXECUTABLE)
 

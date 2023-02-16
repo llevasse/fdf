@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 01:05:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:16:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	render(t_data *data)
 		data->img.mlx_img, 0, 0);
 	return (0);
 }
+
 
 int	main(int argc, char *argv[])
 {

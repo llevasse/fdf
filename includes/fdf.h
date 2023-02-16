@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 14:56:08 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:36:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,14 @@ int				handle_input(int keysym, t_data *data);
 void			img_pix_put(t_img *img, int x, int y, int color);
 int				render(t_data *data);
 
-/* point.c */
-t_point			***parse_points(t_data data);
-t_point			*init_initial_point(int x, int y, t_data data);
+/* parsing_data.c */
 char			**get_data(int *nb_line, int *len, int fd);
 int				get_nb_of_element_in_array(char **str);
-void			get_rotated_point(t_data data, t_point *point, int *x, int *y);
-t_point			 *init_right_point(t_data data, t_point *left_point, int x, int y);
+
+/* point.c */
+t_point			***parse_points(t_data data);
+t_point			*init_point(t_data data, int x, int y);
+void			get_rotated_point(t_data data, int *x, int *y);
 
 /* connect.c */
 void			connect_points(t_point ***points, t_data data);
