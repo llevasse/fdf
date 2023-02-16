@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:22:04 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 15:23:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:57:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**get_data(int *nb_line, int *len, int fd)
 	char	**elems;
 
 	line = get_next_line(fd);
-	*nb_line = 0;
+	*nb_line = 1;
 	while (line)
 	{
 		temp = get_next_line(fd);

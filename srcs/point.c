@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 16:38:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:58:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_point	***parse_points(t_data data)
 		points[i] = malloc((data.elem_per_line + 1) * sizeof(t_point));
 		if (!points[i])
 			return (clear_point(data), NULL);
-		while (j < data.elem_per_line - 1)
+		while (j < data.elem_per_line)
 		{
 			points[i][j] = init_point(data, i, j);
 			if (!points[i][j])
