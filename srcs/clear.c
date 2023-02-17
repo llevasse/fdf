@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 00:58:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:30:29 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,26 @@ void	clear_split(char **str)
 
 void	clear_point(t_data data)
 {
-	*data.points -= (data.elem_per_line - 1);
-	while (*data.points)
+ 	int	x;
+	int	y;
+	
+	y = 0;
+	x = 0;
+	while (x < data.nb_line)
+		data.points[x++] -= data.elem_per_line;
+	while (data.points[y])
 	{
-		while (**data.points)
+		x = 0;
+		while (data.points[y][x])
 		{
-			free(**data.points);
-			*(*data.points)++ = NULL;
+			free(data.points[y][x]);
+			data.points[y][x++] = NULL;
 		}
-		free (**data.points);
-		*data.points -= (data.elem_per_line - 1);
-		free (*data.points);
-		*(data.points)++ = NULL;
+		free(data.points[y][x]);
+		free(data.points[y]);
+		data.points[y++] = NULL;
 	}
-	data.points -= (data.nb_line);
+	free (data.points[y]);
 	free (data.points);
 	data.points = NULL;
 }

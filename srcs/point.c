@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 19:35:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:51:44 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_point	***parse_points(t_data data)
 			points[i][j]->nb_line = data.nb_line;
 			points[i][j]->elem_per_line = data.elem_per_line;
 			points[i][j]->value = ft_atoi((const char *)*data.line++);
-			points[i][j]->rotated_y -= points[i][j]->value;
+			points[i][j]->rotated_y -= points[i][j]->value * 2;
 			j++;
 		}
 		points[i][j] = NULL;
