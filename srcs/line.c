@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 19:31:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:49:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,44 +58,45 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	return (line);
 }
 
-void	draw_line(t_data *data, t_line *line)
+ void	draw_line(t_data *data, t_line *line)
 {	
-	int	pk;
 	int	x;
 	int	y;
 	int	i;
-	int	color;
+	int	err;
+	int	e2;
+	int	incr_x;
+	int	incr_y;
 
 	x = line->x_a;
 	y = line->y_a;
-	color = WHITE;
-	pk = 2 * line->distance_y - line->distance_x;
+	if (x < line->x_b)
+		incr_x = 1;
+	else
+		incr_x = -1;
+	if (y < line->y_b)
+		incr_y = 1;
+	else
+		incr_y = -1;
+	if (line->distance_x > line->distance_y)
+		err = line->distance_x / 2;
+	else
+		err = (0 - line->distance_y) / 2;
 	i = 0;
-	if (line->line_id == 0)
-		color = RED;
 	while (i <= line->distance_x || i <= line->distance_y)
 	{
-		if (y < 0)
-			break ;
-		if (x < line->x_b)
-			x++;
-		else
-			x--;
-		if (pk < 0 && y >= 0)
+		if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
+			img_pix_put(&data->img, x, y, WHITE);
+		e2 = err;
+		if (e2 > (0 - line->distance_x))
 		{
-			if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
-				img_pix_put(&data->img, x, y, color);
-			pk = pk + 2 * line->distance_y;
+			err -= line->distance_y;
+			x += incr_x;
 		}
-		else
+		if (e2 < line->distance_y)
 		{
-			if (y < line->y_b)
-				y++;
-			else
-				y--;
-			if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
-				img_pix_put(&data->img, x, y, color);
-			pk = pk + 2 * line->distance_y - 2 * line->distance_x;
+			err += line->distance_x;
+			y += incr_y;
 		}
 		i++;
 	}
