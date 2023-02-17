@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 15:16:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/17 23:18:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int argc, char *argv[])
 	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
 	data.points = parse_points(data);
 	data.lines = get_all_lines(data);
+	data.highest_altitude = get_highest_altitude(data);
 	data.mlx_ptr = mlx_init();
 	if (!data.mlx_ptr)
 		return (1);

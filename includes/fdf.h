@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/16 16:34:38 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/17 23:16:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define WINDOW_HEIGHT 720
 
 # define WHITE 0xffffff
+# define HIGHEST_COLOR_R 255
+# define HIGHEST_COLOR_G 0
+# define HIGHEST_COLOR_B 255
 # define RED 0xff0000
 # define PI 3.142857
 
@@ -51,10 +54,19 @@ typedef struct s_line
 	int	line_id;
 	int	x_a;
 	int	y_a;
+	int	altitude_a;
 	int	x_b;
 	int	y_b;
+	int	altitude_b;
 	int	distance_x;
 	int	distance_y;
+	int	len;
+	double	incr_r_pace;
+	double	incr_g_pace;
+	double	incr_b_pace;
+	double	incr_r_step;
+	double	incr_g_step;
+	double	incr_b_step;
 }	t_line;
 
 typedef struct s_point
@@ -86,6 +98,7 @@ typedef struct s_data
 	int				elem_per_line;
 	int				nb_line;
 	char			**line;
+	int				highest_altitude;
 }	t_data;
 
 /* fdf.c */
@@ -122,5 +135,9 @@ void			draw_line(t_data *data, t_line *line);
 
 /* grid.c */
 t_grid			init_grid(void);
+
+/* colour.c */
+int				get_highest_altitude(t_data data);
+unsigned long	get_rgb(t_line line, int y, int highest_altitude);
 
 #endif
