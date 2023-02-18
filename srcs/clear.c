@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/17 13:30:29 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:29:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	clear_point(t_data data)
 	
 	y = 0;
 	x = 0;
-	while (x < data.nb_line)
-		data.points[x++] -= data.elem_per_line;
 	while (data.points[y])
 	{
 		x = 0;
