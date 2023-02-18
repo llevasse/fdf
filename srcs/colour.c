@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/18 11:13:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:37:24 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ unsigned long	get_rgb(t_line line, int y, int highest_altitude)
 		y -= line.y_b;
 	else
 		y -= line.y_a;
+	if (y == 0)
+		return ((HIGHEST_R * 256 * 256) + (HIGHEST_G * 256) + HIGHEST_B);
 	percent_gradiant = (double)y / highest_altitude;
-	r = BASIC_R - ((percent_gradiant * 100) * get_dif(BASIC_R, HIGHEST_COLOR_R));
-	g = BASIC_G - ((percent_gradiant * 100) * get_dif(BASIC_G, HIGHEST_COLOR_G));
-	b = BASIC_B - ((percent_gradiant * 100) * get_dif(BASIC_B, HIGHEST_COLOR_B));
+	r = BASIC_R - ((percent_gradiant * 100) * get_dif(BASIC_R, HIGHEST_R));
+	g = BASIC_G - ((percent_gradiant * 100) * get_dif(BASIC_G, HIGHEST_G));
+	b = BASIC_B - ((percent_gradiant * 100) * get_dif(BASIC_B, HIGHEST_B));
 	(void)percent_gradiant;
 	(void)line_id;
 	return ((r * 256 * 256) + (g * 256) + b);

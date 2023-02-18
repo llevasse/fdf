@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/17 23:17:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:36:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	line->incr_b_step = 0;
 	line->altitude_a = point_a->value;
 	line->altitude_b = point_b->value;
-	r = HIGHEST_COLOR_R;
-	g = HIGHEST_COLOR_G;
-	b = HIGHEST_COLOR_B;
+	r = HIGHEST_R;
+	g = HIGHEST_G;
+	b = HIGHEST_B;
 	if (r == 0)
 		r = 1;
 	if (g == 0)

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/18 11:11:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:36:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define WINDOW_HEIGHT 720
 
 # define WHITE 0xffffff
-# define HIGHEST_COLOR_R 255
-# define HIGHEST_COLOR_G 0
-# define HIGHEST_COLOR_B 255
+# define HIGHEST_R 255
+# define HIGHEST_G 0
+# define HIGHEST_B 255
 # define BASIC_R 255
 # define BASIC_G 255
 # define BASIC_B 255
