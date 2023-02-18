@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/18 10:45:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:13:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,22 @@ unsigned long	get_rgb(t_line line, int y, int highest_altitude)
 	int		line_id;
 
 	if (line.altitude_a == 0 && line.altitude_b == 0)
-		return (WHITE);
+		return ((BASIC_R * 256 * 256) + (BASIC_G * 256) + BASIC_B);
 	line_id = line.line_id;
 	if (line.y_a > line.y_b)
 		y -= line.y_b;
 	else
 		y -= line.y_a;
-	r = HIGHEST_COLOR_R;
-	g = HIGHEST_COLOR_G;
-	b = HIGHEST_COLOR_B;
 	percent_gradiant = (double)y / highest_altitude;
-	if (r != 0)
-		r = r - ((percent_gradiant * 100));
-	if (g != 0)
-		g = g - ((percent_gradiant * 100));
-	if (b != 0)
-		b = b - ((percent_gradiant * 100));
+	r = BASIC_R - ((percent_gradiant * 100) * get_dif(BASIC_R, HIGHEST_COLOR_R));
+	g = BASIC_G - ((percent_gradiant * 100) * get_dif(BASIC_G, HIGHEST_COLOR_G));
+	b = BASIC_B - ((percent_gradiant * 100) * get_dif(BASIC_B, HIGHEST_COLOR_B));
 	(void)percent_gradiant;
 	(void)line_id;
 	return ((r * 256 * 256) + (g * 256) + b);
+}
+
+int	get_dif(int a, int b)
+{
+	return (a - b);
 }

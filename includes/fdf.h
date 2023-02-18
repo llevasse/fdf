@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/17 23:16:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/18 11:11:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define HIGHEST_COLOR_R 255
 # define HIGHEST_COLOR_G 0
 # define HIGHEST_COLOR_B 255
+# define BASIC_R 255
+# define BASIC_G 255
+# define BASIC_B 255
 # define RED 0xff0000
 # define PI 3.142857
 
@@ -139,5 +142,6 @@ t_grid			init_grid(void);
 /* colour.c */
 int				get_highest_altitude(t_data data);
 unsigned long	get_rgb(t_line line, int y, int highest_altitude);
+int				get_dif(int a, int b);
 
 #endif
