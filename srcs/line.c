@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/18 15:36:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/19 11:47:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ t_line	**get_all_lines(t_data data)
 
 t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 {
-	int				r;
-	int				g;
-	int				b;
 	struct s_line	*line;
 
 	line = malloc(sizeof(struct s_line));
@@ -59,30 +56,26 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	line->distance_x = abs(point_b->rotated_x - point_a->rotated_x);
 	line->distance_y = abs(point_b->rotated_y - point_a->rotated_y);
 	line->len = (int)sqrt(pow(line->distance_y, 2) + pow(line->distance_x, 2));
-	line->incr_r_pace = 0;
-	line->incr_r_step = 0;
-	line->incr_g_pace = 0;
-	line->incr_g_step = 0;
-	line->incr_b_pace = 0;
-	line->incr_b_step = 0;
-	line->altitude_a = point_a->value;
-	line->altitude_b = point_b->value;
-	r = HIGHEST_R;
-	g = HIGHEST_G;
-	b = HIGHEST_B;
-	if (r == 0)
-		r = 1;
-	if (g == 0)
-		g = 1;
-	if (b == 0)
-		b = 1;
-	line->incr_r_pace = line->len / r; 
-	line->incr_r_step = line->incr_r_pace / line->len;
-	line->incr_g_pace = line->len / g; 
-	line->incr_g_step = line->incr_g_pace / line->len;
-	line->incr_b_pace = line->len / b;
-	line->incr_b_step = line->incr_b_pace / line->len;
+	line->altitude_a = point_a->value * 2;
+	line->altitude_b = point_b->value * 2;
+	if (line->altitude_a || line->altitude_b)
+		line->z_ratio = get_z_ratio(line); // try to get the ratio of altitude increase for color gradiant
 	return (line);
+}
+
+int	get_z_ratio(t_line *line)
+{
+	int	len_z;
+	
+	if (line->altitude_a == line->altitude_b)
+		return (0);
+	if (line->altitude_a > line->altitude_b)
+	{
+		len_z = line->altitude_a - line->altitude_b;
+		return (line->len / len_z);
+	}
+	len_z = line->altitude_b - line->altitude_a;
+	return (line->len / len_z);
 }
 
 void	draw_line(t_data *data, t_line *line)
@@ -113,7 +106,7 @@ void	draw_line(t_data *data, t_line *line)
 	while (i <= line->distance_x || i <= line->distance_y)
 	{
 		if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
-			img_pix_put(&data->img, x, y, get_rgb(*line, y, data->highest_altitude));
+			img_pix_put(&data->img, x, y, get_rgb(*line, i, data->highest_altitude));
 		e2 = err;
 		if (e2 > (0 - line->distance_x))
 		{
