@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/19 11:35:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/19 12:25:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@
 # include <mlx.h>
 # include <X11/keysym.h>
 # include <math.h>
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
+
+
+/* 720p */
+//# define WINDOW_WIDTH 1280
+//# define WINDOW_HEIGHT 720
+
+/* 1080p */
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
+
 
 # define WHITE 0xffffff
 # define HIGHEST_R 255
@@ -64,7 +72,7 @@ typedef struct s_line
 	int	len;
 	int	altitude_a;
 	int	altitude_b;
-	int	z_ratio;
+	double	z_ratio;
 }	t_line;
 
 typedef struct s_point
@@ -129,7 +137,7 @@ void			clear_line(t_data data);
 /* line.c */
 t_line			**get_all_lines(t_data data);
 t_line			*init_line(t_point *point_a, t_point *point_b, int line_id);
-int				get_z_ratio(t_line *line);
+double			get_z_ratio(t_line *line);
 void			draw_line(t_data *data, t_line *line);
 
 /* grid.c */
@@ -137,7 +145,7 @@ t_grid			init_grid(void);
 
 /* colour.c */
 int				get_highest_altitude(t_data data);
-unsigned long	get_rgb(t_line line, int y, int highest_altitude);
+unsigned int	get_rgb(t_line line, int i, int highest_altitude);
 int				get_dif(int a, int b);
 
 #endif
