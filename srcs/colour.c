@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/20 12:10:43 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:10:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	get_lowest_altitude(t_data data)
 unsigned int	get_rgb(t_line line, int i, t_data data)
 {
 	double	percent_gradiant;
+	int		len;
 	int		r;
 	int		g;
 	int		b;
@@ -73,10 +74,11 @@ unsigned int	get_rgb(t_line line, int i, t_data data)
 		return ((HIGHEST_R * 256 * 256) + (HIGHEST_G * 256) + HIGHEST_B);
 	if (line.z_ratio == 0 && line.altitude_a == data.lowest_altitude)
 		return ((LOWEST_R * 256 * 256) + (LOWEST_G * 256) + LOWEST_B);
+	len = get_len_with_high_altitude(line, data);
 	if (line.altitude_a < line.altitude_b)
-		percent_gradiant = (double)i / line.len;
+		percent_gradiant = (double)i / len;
 	else
-		percent_gradiant = (double)(line.len - i) / line.len;
+		percent_gradiant = (double)(len - i) / len;
 	if (percent_gradiant > 1.0)
 		percent_gradiant = 1;
 	if (line.z_ratio > 0)
@@ -92,6 +94,24 @@ unsigned int	get_rgb(t_line line, int i, t_data data)
 		b = BEG_B - ((1 - percent_gradiant) * get_dif(BEG_B, LOWEST_B));
 	}
 	return ((r * 256 * 256) + (g * 256) + b); 
+}
+
+int	get_len_with_high_altitude(t_line line, t_data data)
+{
+	int	dy;
+	int	y_a;
+	int	y_b;
+	int	len;
+
+	y_a = line.y_a;
+	if (line.altitude_a != 0)
+		y_a *= data.highest_altitude / line.altitude_a;
+	y_b = line.y_b;
+	if (line.altitude_b != 0)
+		y_b *= data.highest_altitude / line.altitude_b;
+	dy = abs(y_b - y_a);
+	len = (int)sqrt(pow(dy, 2) + pow(line.distance_x, 2));
+	return (len);
 }
 
 int	get_dif(int a, int b)
