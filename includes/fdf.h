@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/19 12:25:50 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:05:50 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,15 @@
 # define HIGHEST_R 255
 # define HIGHEST_G 0
 # define HIGHEST_B 255
-# define BASIC_R 255
-# define BASIC_G 255
-# define BASIC_B 255
+# define LOWEST_R 0
+# define LOWEST_G 255
+# define LOWEST_B 0
+# define BEG_R 0
+# define BEG_G 255
+# define BEG_B 255
+# define ZERO_R 255
+# define ZERO_G 255
+# define ZERO_B 255
 # define RED 0xff0000
 # define PI 3.142857
 
@@ -105,6 +111,7 @@ typedef struct s_data
 	int				nb_line;
 	char			**line;
 	int				highest_altitude;
+	int				lowest_altitude;
 }	t_data;
 
 /* fdf.c */
@@ -145,7 +152,8 @@ t_grid			init_grid(void);
 
 /* colour.c */
 int				get_highest_altitude(t_data data);
-unsigned int	get_rgb(t_line line, int i, int highest_altitude);
+int				get_lowest_altitude(t_data data);
+unsigned int	get_rgb(t_line line, int i, t_data data);
 int				get_dif(int a, int b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/19 12:50:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:08:00 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,30 @@ int	get_highest_altitude(t_data data)
 	return (highest * 2);
 }
 
-unsigned int	get_rgb(t_line line, int i, int highest_altitude)
+int	get_lowest_altitude(t_data data)
+{
+	int	x;
+	int	y;
+	int	lowest;
+	
+	y = 0;
+	x = 0;
+	lowest = 0;
+	while (data.points[y])
+	{
+		x = 0;
+		while (data.points[y][x])
+		{
+			if (lowest > data.points[y][x]->value)
+				lowest = data.points[y][x]->value;
+			x++;
+		}
+		y++;	
+	}
+	return (lowest * 2);
+}
+
+unsigned int	get_rgb(t_line line, int i, t_data data)
 {
 	double	percent_gradiant;
 	int		r;
@@ -45,19 +68,29 @@ unsigned int	get_rgb(t_line line, int i, int highest_altitude)
 	int		b;
 
 	if (line.altitude_a == 0 && line.altitude_b == 0)
-		return ((BASIC_R * 256 * 256) + (BASIC_G * 256) + BASIC_B);
-	if (line.z_ratio == 0)
+		return ((ZERO_R * 256 * 256) + (ZERO_G * 256) + ZERO_B);
+	if (line.z_ratio == 0 && line.altitude_a == data.highest_altitude)
 		return ((HIGHEST_R * 256 * 256) + (HIGHEST_G * 256) + HIGHEST_B);
+	if (line.z_ratio == 0 && line.altitude_a == data.lowest_altitude)
+		return ((LOWEST_R * 256 * 256) + (LOWEST_G * 256) + LOWEST_B);
 	if (line.altitude_a < line.altitude_b)
 		percent_gradiant = (double)i / line.len;
 	else
 		percent_gradiant = (double)(line.len - i) / line.len;
 	if (percent_gradiant > 1.0)
 		percent_gradiant = 1;
-	r = BASIC_R - (percent_gradiant * get_dif(BASIC_R, HIGHEST_R));
-	g = BASIC_G - (percent_gradiant * get_dif(BASIC_G, HIGHEST_G));
-	b = BASIC_B - (percent_gradiant * get_dif(BASIC_B, HIGHEST_B));
-	(void)highest_altitude;
+	if (line.z_ratio > 0)
+	{
+		r = BEG_R - (percent_gradiant * get_dif(BEG_R, HIGHEST_R));
+		g = BEG_G - (percent_gradiant * get_dif(BEG_G, HIGHEST_G));
+		b = BEG_B - (percent_gradiant * get_dif(BEG_B, HIGHEST_B));
+	}
+	else
+	{
+		r = BEG_R - (percent_gradiant * get_dif(BEG_R, LOWEST_R));
+		g = BEG_G - (percent_gradiant * get_dif(BEG_G, LOWEST_G));
+		b = BEG_B - (percent_gradiant * get_dif(BEG_B, LOWEST_B));
+	}
 	return ((r * 256 * 256) + (g * 256) + b); 
 }
 

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/19 11:52:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:05:13 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,13 @@ double	get_z_ratio(t_line *line)
 	if (line->altitude_a > line->altitude_b)
 	{
 		len_z = line->altitude_a - line->altitude_b;
+		if (line->altitude_a < 0  || line ->altitude_b < 0)
+			len_z *= -1;
 		return ((double)line->len / len_z);
 	}
 	len_z = line->altitude_b - line->altitude_a;
+	if (line->altitude_a < 0  || line ->altitude_b < 0)
+		len_z *= -1;
 	return ((double)line->len / len_z);
 }
 
@@ -106,7 +110,7 @@ void	draw_line(t_data *data, t_line *line)
 	while (i <= line->distance_x || i <= line->distance_y)
 	{
 		if (y >= 0 && y <= WINDOW_HEIGHT && x >= 0 && x <= WINDOW_WIDTH)
-			img_pix_put(&data->img, x, y, get_rgb(*line, i, data->highest_altitude));
+			img_pix_put(&data->img, x, y, get_rgb(*line, i, *data));
 		e2 = err;
 		if (e2 > (0 - line->distance_x))
 		{
