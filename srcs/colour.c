@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/20 12:08:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/20 12:10:43 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ unsigned int	get_rgb(t_line line, int i, t_data data)
 	}
 	else
 	{
-		r = BEG_R - (percent_gradiant * get_dif(BEG_R, LOWEST_R));
-		g = BEG_G - (percent_gradiant * get_dif(BEG_G, LOWEST_G));
-		b = BEG_B - (percent_gradiant * get_dif(BEG_B, LOWEST_B));
+		r = BEG_R - ((1 - percent_gradiant) * get_dif(BEG_R, LOWEST_R));
+		g = BEG_G - ((1 - percent_gradiant) * get_dif(BEG_G, LOWEST_G));
+		b = BEG_B - ((1 - percent_gradiant) * get_dif(BEG_B, LOWEST_B));
 	}
 	return ((r * 256 * 256) + (g * 256) + b); 
 }
