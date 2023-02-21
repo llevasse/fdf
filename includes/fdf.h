@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:11:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:46:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <math.h>
 
 
@@ -163,5 +164,8 @@ void			zoom_in(t_data *data);
 void			zoom_out(t_data *data);
 void			reset_img(t_data *data);
 
+/* rotate.c */
+void	rotate_left(t_data *data, int value);
+void	rotate_right(t_data *data, int value);
 
 #endif

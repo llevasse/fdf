@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:12:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:48:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	handle_input(int keysym, t_data *data)
 		zoom_in(data);
 	if (keysym == XK_KP_Subtract)
 		zoom_out(data);
+	if (keysym == XK_Left || keysym == XK_KP_Left || keysym == XK_q || keysym == XK_Q)
+		rotate_left(data, 1);
+	if (keysym == XK_Right || keysym == XK_KP_Right || keysym == XK_d || keysym == XK_D)
+		rotate_right(data, 1);
 	return (0);
 }
 
@@ -92,7 +96,7 @@ int	main(int argc, char *argv[])
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_key_hook(data.win_ptr, &handle_input, &data);
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask,  &handle_input, &data);
 
 	mlx_loop(data.mlx_ptr);
 
