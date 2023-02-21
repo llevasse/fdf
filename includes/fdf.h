@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:46:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:09:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_grid
 	int		x_angle;
 	int		y_angle;
 	int		grid_z_rotation;
+	double	x_decal;
+	double	y_decal;
 	double	radian_x;
 }	t_grid;
 
@@ -121,6 +123,7 @@ int				handle_no_event(void *data);
 int				handle_input(int keysym, t_data *data);
 void			img_pix_put(t_img *img, int x, int y, int color);
 int				render(t_data *data);
+void			print_grid_info(t_data *data);
 
 /* parsing_data.c */
 char			**get_data(int *nb_line, int *len, int fd);
@@ -168,4 +171,9 @@ void			reset_img(t_data *data);
 void	rotate_left(t_data *data, int value);
 void	rotate_right(t_data *data, int value);
 
+/* move.c */
+void	move_left(t_data *data, int value);
+void	move_right(t_data * data, int value);
+void	move_up(t_data *data, int value);
+void	move_down(t_data * data, int value);
 #endif

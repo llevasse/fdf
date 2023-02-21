@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/21 01:32:10 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/21 16:56:37 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES			=	srcs/fdf.c				\
 					srcs/colour.c			\
 					srcs/zoom.c				\
 					srcs/rotate.c			\
+					srcs/move.c				\
 
 LIBFT_FILES		=	libft/ft_putstr_fd.c \
 					libft/ft_strchr.c \

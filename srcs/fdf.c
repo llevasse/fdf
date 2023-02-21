@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:48:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:09:56 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,19 @@ int	handle_input(int keysym, t_data *data)
 		zoom_in(data);
 	if (keysym == XK_KP_Subtract)
 		zoom_out(data);
-	if (keysym == XK_Left || keysym == XK_KP_Left || keysym == XK_q || keysym == XK_Q)
+	if (keysym == XK_Left || keysym == XK_KP_Left)
 		rotate_left(data, 1);
-	if (keysym == XK_Right || keysym == XK_KP_Right || keysym == XK_d || keysym == XK_D)
+	if (keysym == XK_Right || keysym == XK_KP_Right)
 		rotate_right(data, 1);
+	if (keysym == XK_a || keysym == XK_A)
+		move_left(data, 1);
+	if (keysym == XK_d || keysym == XK_D)
+		move_right(data, 1);
+	if (keysym == XK_w || keysym == XK_W)
+		move_up(data, 1);
+	if (keysym == XK_s || keysym == XK_S)
+		move_down(data, 1);
+	print_grid_info(data);
 	return (0);
 }
 
@@ -54,6 +63,16 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
 		i -= 8;
 	}
+}
+
+void	print_grid_info(t_data *data)
+{
+	ft_printf("grid of size %ix%i\n\
+move by x of %i and by y of %i \
+with a rotation of %i\n",
+	data->grid.grid_width, data->grid.grid_height, 
+	data->grid.x_decal, data->grid.y_decal,
+	data->grid.x_angle);	
 }
 
 int	render(t_data *data)

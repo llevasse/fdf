@@ -1,54 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 00:47:41 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 16:52:47 by llevasse         ###   ########.fr       */
+/*   Created: 2023/02/21 16:49:07 by llevasse          #+#    #+#             */
+/*   Updated: 2023/02/21 17:09:27 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	zoom_in(t_data *data)
+void	move_left(t_data *data, int value)
 {
 	reset_img(data);
 	clear_point(*data);
 	clear_line(*data);
-	data->grid.zoom *= 1.5;
+	data->grid.x_decal -= value;
 	data->points = parse_points(*data);
 	data->lines = get_all_lines(*data);
 	render(data);
 }
 
-void	zoom_out(t_data *data)
+void	move_right(t_data * data, int value)
 {
 	reset_img(data);
 	clear_point(*data);
 	clear_line(*data);
-	data->grid.zoom *= 0.5;
+	data->grid.x_decal += value;
 	data->points = parse_points(*data);
 	data->lines = get_all_lines(*data);
-	render(data);		
+	render(data);
 }
 
-void	reset_img(t_data *data)
+void	move_up(t_data *data, int value)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	if (!data->win_ptr)
-		return ;
-	while (y < WINDOW_HEIGHT)
-	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-			img_pix_put(&data->img, x++, y, BG);
-		y++;
-	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-	data->img.mlx_img, 0, 0);
+	reset_img(data);
+	clear_point(*data);
+	clear_line(*data);
+	data->grid.y_decal -= value;
+	data->points = parse_points(*data);
+	data->lines = get_all_lines(*data);
+	render(data);
 }
+
+void	move_down(t_data * data, int value)
+{
+	reset_img(data);
+	clear_point(*data);
+	clear_line(*data);
+	data->grid.y_decal += value;
+	data->points = parse_points(*data);
+	data->lines = get_all_lines(*data);
+	render(data);
+}
+
