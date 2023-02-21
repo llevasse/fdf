@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 00:30:48 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:43:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,21 @@ unsigned int	get_rgb(t_line line, int i, t_data data)
 		i += len / 2;
 	if (line.altitude_a < line.altitude_b)
 		percent_gradiant = (double)i / len;
+	else if (line.altitude_a == line.altitude_b)
+		percent_gradiant = (double)line.altitude_a / data.highest_altitude;
 	else
 		percent_gradiant = (double)(len - i) / len;
 	if (line.z_ratio > 0 && line.altitude_a > line.altitude_b)
 		percent_gradiant -= (double)line.altitude_a / data.highest_altitude;
 	if (percent_gradiant > 1.0)
 		percent_gradiant = 1;
-	if (line.z_ratio > 0)
+	if (line.z_ratio > 0 || (line.altitude_a > 0 && line.altitude_b > 0))
 	{
 		r = BEG_R - (percent_gradiant * get_dif(BEG_R, HIGHEST_R));
 		g = BEG_G - (percent_gradiant * get_dif(BEG_G, HIGHEST_G));
 		b = BEG_B - (percent_gradiant * get_dif(BEG_B, HIGHEST_B));
 	}
-	else
+	else if (line.z_ratio < 0)
 	{
 		r = BEG_R - ((1 - percent_gradiant) * get_dif(BEG_R, LOWEST_R));
 		g = BEG_G - ((1 - percent_gradiant) * get_dif(BEG_G, LOWEST_G));
