@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 00:47:41 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:03:22 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:11:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ void	zoom_in(t_data *data)
 		data->points = parse_points(*data);
 		data->lines = get_all_lines(*data);
 		render(data);
+}
+
+void	zoom_out(t_data *data)
+{
+		reset_img(data);
+		clear_point(*data);
+		clear_line(*data);
+		data->grid.zoom -= 0.5;
+		data->points = parse_points(*data);
+		data->lines = get_all_lines(*data);
+		render(data);		
 }
 
 void	reset_img(t_data *data)

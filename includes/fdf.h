@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:01:21 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:11:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int				get_len_with_high_altitude(t_line line, t_data data);
 
 /* zoom.c */
 void			zoom_in(t_data *data);
+void			zoom_out(t_data *data);
 void			reset_img(t_data *data);
 
 
