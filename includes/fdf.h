@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/20 12:28:47 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 01:01:21 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ZERO_G 255
 # define ZERO_B 255
 # define RED 0xff0000
+# define BG 0x000000
 # define PI 3.142857
 
 typedef struct s_img
@@ -56,7 +57,7 @@ typedef struct s_img
 
 typedef struct s_grid
 {
-	int		zoom;
+	double	zoom;
 	int		grid_height;
 	int		grid_width;
 	int		wire_len;
@@ -156,5 +157,10 @@ int				get_lowest_altitude(t_data data);
 unsigned int	get_rgb(t_line line, int i, t_data data);
 int				get_dif(int a, int b);
 int				get_len_with_high_altitude(t_line line, t_data data);
+
+/* zoom.c */
+void			zoom_in(t_data *data);
+void			reset_img(t_data *data);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/20 12:06:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/21 00:50:38 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	handle_input(int keysym, t_data *data)
 		clear_line(*data);
 		clear_split(data->line);
 	}
+	if (keysym == XK_KP_Add)
+		zoom_in(data);
 	return (0);
 }
 
