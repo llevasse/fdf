@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 17:09:56 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:22:49 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,21 @@ int	render(t_data *data)
 	return (0);
 }
 
+t_data	init_data(int fd)
+{
+	t_data data;
+	
+	data.grid = init_grid();
+	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
+	data.points = parse_points(data);
+	set_colour(&data);
+	data.lines = get_all_lines(data);
+	data.highest_altitude = get_highest_altitude(data);
+	data.lowest_altitude = get_lowest_altitude(data);
+	data.mlx_ptr = mlx_init();
+	
+	return (data);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -98,13 +113,7 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
-	data.grid = init_grid();
-	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
-	data.points = parse_points(data);
-	data.lines = get_all_lines(data);
-	data.highest_altitude = get_highest_altitude(data);
-	data.lowest_altitude = get_lowest_altitude(data);
-	data.mlx_ptr = mlx_init();
+	data = init_data(fd);
 	if (!data.mlx_ptr)
 		return (1);
 	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 17:43:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:31:14 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	get_lowest_altitude(t_data data)
 	return (lowest * 2);
 }
 
-unsigned int	get_rgb(t_line line, int i, t_data data)
+unsigned int	get_colour(t_line line, int i, t_data data)
 {
 	double	percent_gradiant;
-	int		len;
+	int		full_len;
 	int		r;
 	int		g;
 	int		b;
@@ -74,17 +74,17 @@ unsigned int	get_rgb(t_line line, int i, t_data data)
 		return ((HIGHEST_R * 256 * 256) + (HIGHEST_G * 256) + HIGHEST_B);
 	if (line.z_ratio == 0 && line.altitude_a == data.lowest_altitude)
 		return ((LOWEST_R * 256 * 256) + (LOWEST_G * 256) + LOWEST_B);
-	len = get_len_with_high_altitude(line, data);
+	full_len = get_len_with_high_altitude(line, data);
 	if (line.altitude_a && line.altitude_a < line.altitude_b)
-		i += len / 2;
+		i += full_len / 2;
 	if (line.altitude_b && line.altitude_b < line.altitude_a)
-		i += len / 2;
+		i += full_len / 2;
 	if (line.altitude_a < line.altitude_b)
-		percent_gradiant = (double)i / len;
+		percent_gradiant = (double)i / full_len;
 	else if (line.altitude_a == line.altitude_b)
 		percent_gradiant = (double)line.altitude_a / data.highest_altitude;
 	else
-		percent_gradiant = (double)(len - i) / len;
+		percent_gradiant = (double)(line.len - i) / full_len;
 	if (line.z_ratio > 0 && line.altitude_a > line.altitude_b)
 		percent_gradiant -= (double)line.altitude_a / data.highest_altitude;
 	if (percent_gradiant > 1.0)
@@ -104,6 +104,11 @@ unsigned int	get_rgb(t_line line, int i, t_data data)
 	return ((r * 256 * 256) + (g * 256) + b); 
 }
 
+unsigned int	get_rgb(int r, int g, int b)
+{
+	return ((r * 256 * 256) + (g * 256) + b); 
+}
+
 int	get_len_with_high_altitude(t_line line, t_data data)
 {
 	int	dy;
@@ -113,12 +118,12 @@ int	get_len_with_high_altitude(t_line line, t_data data)
 
 	y_a = line.y_a;
 	if (line.altitude_a != 0)
-		y_a *= line.altitude_a / data.highest_altitude;
+		y_a *= (double)line.altitude_a / data.highest_altitude;
 	if (line.altitude_a != 0 && line.altitude_b > line.altitude_a)
 		y_a = line.y_a + line.altitude_a;
 	y_b = line.y_b;
 	if (line.altitude_b != 0)
-		y_b *= data.highest_altitude / line.altitude_b;
+		y_b *= (double)data.highest_altitude / line.altitude_b;
 	dy = abs(y_b - y_a);
 	len = (int)sqrt(pow(dy, 2) + pow(line.distance_x, 2));
 	return (len);

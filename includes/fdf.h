@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 17:09:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:29:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,19 @@ typedef struct s_grid
 
 typedef struct s_line
 {
-	int	line_id;
-	int	x_a;
-	int	x_b;
-	int	distance_x;
-	int	y_a;
-	int	y_b;
-	int	distance_y;
-	int	len;
-	int	altitude_a;
-	int	altitude_b;
-	double	z_ratio;
+	int				line_id;
+	int				x_a;
+	int				x_b;
+	int				distance_x;
+	int				y_a;
+	int				y_b;
+	int				distance_y;
+	int				len;
+	int				altitude_a;
+	int				altitude_b;
+	unsigned int	colour_a;
+	unsigned int	colour_b;
+	double			z_ratio;
 }	t_line;
 
 typedef struct s_point
@@ -133,6 +135,7 @@ int				get_nb_of_element_in_array(char **str);
 t_point			***parse_points(t_data data);
 t_point			*init_point(t_data data, int x, int y);
 void			get_rotated_point(t_data data, int *x, int *y);
+void			set_colour(t_data *data);
 
 /* connect.c */
 void			connect_points(t_point ***points, t_data data);
@@ -158,9 +161,10 @@ t_grid			init_grid(void);
 /* colour.c */
 int				get_highest_altitude(t_data data);
 int				get_lowest_altitude(t_data data);
-unsigned int	get_rgb(t_line line, int i, t_data data);
+unsigned int	get_colour(t_line line, int i, t_data data);
 int				get_dif(int a, int b);
 int				get_len_with_high_altitude(t_line line, t_data data);
+unsigned int	get_rgb(int r, int g, int b);
 
 /* zoom.c */
 void			zoom_in(t_data *data);

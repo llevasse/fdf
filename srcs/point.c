@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 17:07:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/22 23:30:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_point	***parse_points(t_data data)
 			points[i][j]->elem_per_line = data.elem_per_line;
 			points[i][j]->value = ft_atoi((const char *)*data.line++);
 			points[i][j]->rotated_y -= (points[i][j]->value * 2) * data.grid.zoom;
+			points[i][j]->color = -1;
 			j++;
 		}
 		points[i][j] = NULL;
@@ -86,4 +87,24 @@ void	get_rotated_point(t_data data, int *x, int *y)
 			+ cos_rad * (*y - data.grid.grid_height) + data.grid.grid_height);
 	*x = temp_x;
 	*y = temp_y;
+}
+
+void	set_colour(t_data *data)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (data->points[y])
+	{
+		x = 0;
+		while (data->points[y][x])
+		{
+			if (data->points[y][x]->value == 0)
+				data->points[y][x] = get_rgb(ZERO_R, ZERO_G, ZERO_B);
+			else if (data->points[y][x]->value == get_highest_altitude(*data))
+				data->points[y][x] = get_rgb(HIGHEST_R, HIGHEST_G, HIGHEST_B);
+		}
+	}
+	return ;
 }
