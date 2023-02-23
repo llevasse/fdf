@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/22 23:30:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:16:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ void	get_rotated_point(t_data data, int *x, int *y)
 
 void	set_colour(t_data *data)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	double	gradiant;
 
 	y = 0;
 	while (data->points[y])
@@ -101,10 +102,21 @@ void	set_colour(t_data *data)
 		while (data->points[y][x])
 		{
 			if (data->points[y][x]->value == 0)
-				data->points[y][x] = get_rgb(ZERO_R, ZERO_G, ZERO_B);
+				data->points[y][x]->color = get_rgb(ZERO_R, ZERO_G, ZERO_B);
 			else if (data->points[y][x]->value == get_highest_altitude(*data))
-				data->points[y][x] = get_rgb(HIGHEST_R, HIGHEST_G, HIGHEST_B);
+				data->points[y][x]->color = get_rgb(HIGHEST_R, HIGHEST_G, HIGHEST_B);
+			else if (data->points[y][x]->value == get_lowest_altitude(*data))
+				data->points[y][x]->color = get_rgb(LOWEST_R, LOWEST_G, LOWEST_B);
+			else if (data->points[y][x]->value > 0)
+			{
+				gradiant = (double)data->points[y][x]->value / get_highest_altitude(*data);
+				data->points[y][x]->color = get_rgb(BEG_R - (gradiant * get_dif(BEG_R, HIGHEST_R)),
+				BEG_G - (gradiant * get_dif(BEG_G, HIGHEST_G)),
+				BEG_B - (gradiant * get_dif(BEG_B, HIGHEST_B)));
+			}
+			x++;
 		}
+		y++;
 	}
 	return ;
 }

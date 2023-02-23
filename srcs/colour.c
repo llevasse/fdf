@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/22 23:31:14 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:16:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ int	get_highest_altitude(t_data data)
 	y = 0;
 	x = 0;
 	highest = 0;
-	while (x < data.nb_line)
-		data.points[x++] -= data.elem_per_line;
+	if (data.points[0][0] == NULL)
+	{
+		while (x < data.nb_line)
+			data.points[x++] -= data.elem_per_line;
+	}
 	while (data.points[y])
 	{
 		x = 0;
