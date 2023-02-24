@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 11:54:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:05:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef	struct s_colour
 	int				r;
 	int				g;
 	int				b;
-	unsigned int	colour;
+	int	colour;
 }	t_colour;
 
 typedef struct s_line
@@ -147,6 +147,8 @@ t_point			*init_point(t_data data, int x, int y);
 void			get_rotated_point(t_data data, int *x, int *y);
 void			set_colour(t_data *data);
 t_colour		init_colour(int colour, int r, int g, int b);
+t_colour		init_colour_from_str(const char *str);
+int				hex2int(char byte);
 
 /* connect.c */
 void			connect_points(t_point ***points, t_data data);
