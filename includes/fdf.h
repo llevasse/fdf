@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/22 23:29:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:20:23 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ typedef struct s_grid
 	double	radian_x;
 }	t_grid;
 
+typedef	struct s_colour
+{
+	int				r;
+	int				g;
+	int				b;
+	unsigned int	colour;
+}	t_colour;
+
 typedef struct s_line
 {
 	int				line_id;
@@ -82,8 +90,8 @@ typedef struct s_line
 	int				len;
 	int				altitude_a;
 	int				altitude_b;
-	unsigned int	colour_a;
-	unsigned int	colour_b;
+	t_colour		colour_a;
+	t_colour		colour_b;
 	double			z_ratio;
 }	t_line;
 
@@ -96,7 +104,7 @@ typedef struct s_point
 	int				rotated_x;
 	int				rotated_y;
 	int				value;
-	int				color;
+	t_colour		color;
 	int				nb_line;
 	int				elem_per_line;
 	struct s_point	*left_point;
@@ -136,6 +144,7 @@ t_point			***parse_points(t_data data);
 t_point			*init_point(t_data data, int x, int y);
 void			get_rotated_point(t_data data, int *x, int *y);
 void			set_colour(t_data *data);
+t_colour		init_colour(int colour, int r, int g, int b);
 
 /* connect.c */
 void			connect_points(t_point ***points, t_data data);

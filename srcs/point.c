@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 10:00:34 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:32:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_point	***parse_points(t_data data)
 			points[i][j]->elem_per_line = data.elem_per_line;
 			points[i][j]->value = ft_atoi((const char *)*data.line++);
 			points[i][j]->rotated_y -= (points[i][j]->value * 2) * data.grid.zoom;
-			points[i][j]->color = -1;
+			points[i][j]->color = init_colour(-1, -1, -1, -1);
 			j++;
 		}
 		points[i][j] = NULL;
@@ -102,15 +102,16 @@ void	set_colour(t_data *data)
 		while (data->points[y][x])
 		{
 			if (data->points[y][x]->value == 0)
-				data->points[y][x]->color = get_rgb(ZERO_R, ZERO_G, ZERO_B);
+				data->points[y][x]->color = init_colour(0, ZERO_R, ZERO_G, ZERO_B);
 			else if (data->points[y][x]->value == get_highest_altitude(*data))
-				data->points[y][x]->color = get_rgb(HIGHEST_R, HIGHEST_G, HIGHEST_B);
+				data->points[y][x]->color = init_colour(0, HIGHEST_R, HIGHEST_G, HIGHEST_B);
 			else if (data->points[y][x]->value == get_lowest_altitude(*data))
-				data->points[y][x]->color = get_rgb(LOWEST_R, LOWEST_G, LOWEST_B);
+				data->points[y][x]->color = init_colour(0, LOWEST_R, LOWEST_G, LOWEST_B);
 			else if (data->points[y][x]->value > 0)
 			{
 				gradiant = (double)data->points[y][x]->value / get_highest_altitude(*data);
-				data->points[y][x]->color = get_rgb(BEG_R - (gradiant * get_dif(BEG_R, HIGHEST_R)),
+				data->points[y][x]->color = init_colour(0,
+				BEG_R - (gradiant * get_dif(BEG_R, HIGHEST_R)),
 				BEG_G - (gradiant * get_dif(BEG_G, HIGHEST_G)),
 				BEG_B - (gradiant * get_dif(BEG_B, HIGHEST_B)));
 			}
@@ -119,4 +120,22 @@ void	set_colour(t_data *data)
 		y++;
 	}
 	return ;
+}
+
+t_colour	init_colour(int colour, int r, int g, int b)
+{
+	struct s_colour elem;
+
+	elem.r = r;
+	elem.g = g;
+	elem.b = b;
+	elem.colour = (r * 256 * 256) + (g * 256) + b;
+	if (r == 0 && g == 0 && b == 0 && colour != 0)
+	{
+		elem.colour = colour;
+		elem.r = (colour >> 16) / 255.0;
+		elem.g = (colour >> 8) / 255.0;
+		elem.b = colour / 255.0;
+	}
+	return (elem);
 }

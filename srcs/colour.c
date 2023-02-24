@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 09:59:17 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:35:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int	get_lowest_altitude(t_data data)
 
 unsigned int	get_colour(t_line line, int i, t_data data)
 {
-	int		r;
-	int		g;
-	int		b;
-	int		colour;
-	double	gradiant;
+	int			r;
+	int			g;
+	int			b;
+	t_colour	colour;
+	double		gradiant;
 
 	if (line.altitude_a < line.altitude_b)
 		gradiant = (double)i / line.len;
@@ -87,15 +87,15 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 		colour = line.colour_b;
 	if (line.z_ratio > 0 || (line.altitude_a > 0 && line.altitude_b > 0))
 	{
-		r = (gradiant * (colour >> 16));
-		g = (gradiant * (colour >> 8));
-		b = (gradiant * colour);
+		r = gradiant * colour.r;
+		g = gradiant * colour.g;
+		b = gradiant * colour.b;
 	}
 	else if (line.z_ratio < 0)
 	{
-		r = ((1 - gradiant) * colour);
-		g = ((1 - gradiant) * colour);
-		b = ((1 - gradiant) * colour);
+		r = ((1 - gradiant) * colour.r);
+		g = ((1 - gradiant) * colour.b);
+		b = ((1 - gradiant) * colour.g);
 	}
 	return ((r * 256 * 256) + (g * 256) + b); 
 
