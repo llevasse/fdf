@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 20:05:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:19:19 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ t_point	*init_point(t_data data, int x, int y)
 		return (NULL);
  	beg_y = data.grid.grid_height - ((data.grid.wire_len * data.grid.zoom) * (data.nb_line / 2));
 	new->tab_y = y;
-	new->y = beg_y + ((y + data.grid.y_decal) * (data.grid.wire_len * data.grid.zoom));
+	new->y = beg_y + (y* (data.grid.wire_len * data.grid.zoom)) + data.grid.y_decal;
 	new->rotated_y = new->y;
 	
 	beg_x = data.grid.grid_width - ((data.grid.wire_len * data.grid.zoom) * (data.elem_per_line / 2));
 	new->tab_x = x;
-	new->x = beg_x + ((x + data.grid.x_decal) * (data.grid.wire_len * data.grid.zoom));
+	new->x = beg_x + (x * (data.grid.wire_len * data.grid.zoom)) + data.grid.x_decal;
 	new->rotated_x = new->x;
 	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y));	
 	return (new);

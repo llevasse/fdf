@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 11:56:11 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:21:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	handle_input(int keysym, t_data *data)
 	if (keysym == XK_Right || keysym == XK_KP_Right)
 		rotate_right(data, 1);
 	if (keysym == XK_a || keysym == XK_A)
-		move_left(data, 1);
+		move_left(data, 30);
 	if (keysym == XK_d || keysym == XK_D)
-		move_right(data, 1);
+		move_right(data, 30);
 	if (keysym == XK_w || keysym == XK_W)
-		move_up(data, 1);
+		move_up(data, 30);
 	if (keysym == XK_s || keysym == XK_S)
-		move_down(data, 1);
+		move_down(data, 30);
 	print_grid_info(data);
 	return (0);
 }
