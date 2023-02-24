@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 10:35:04 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:45:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	int			g;
 	int			b;
 	t_colour	colour;
+	t_colour	colour_2;
 	double		gradiant;
 
 	if (line.altitude_a < line.altitude_b)
@@ -82,21 +83,34 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	if (gradiant > 1.0)
 		gradiant = 1;
 	if (line.altitude_a > line.altitude_b)
-		colour = line.colour_a;
-	else
-		colour = line.colour_b;
-	if (line.z_ratio > 0 || (line.altitude_a > 0 && line.altitude_b > 0))
 	{
-		r = gradiant * colour.r;
-		g = gradiant * colour.g;
-		b = gradiant * colour.b;
+		colour = line.colour_a;
+		colour_2 = line.colour_b;
+	}
+	else
+	{
+		colour = line.colour_b;
+		colour_2 = line.colour_a;
+	}
+	if (line.altitude_a == line.altitude_b)
+	{
+		r =  colour.r;
+		g =  colour.g;
+		b =  colour.b;
+	}
+	else if (line.z_ratio > 0)
+	{
+		r =  colour_2.r - (gradiant * get_dif(colour_2.r, colour.r));
+		g =  colour_2.g - (gradiant * get_dif(colour_2.g, colour.g));
+		b =  colour_2.b - (gradiant * get_dif(colour_2.b, colour.b));
 	}
 	else if (line.z_ratio < 0)
 	{
-		r = ((1 - gradiant) * colour.r);
-		g = ((1 - gradiant) * colour.b);
-		b = ((1 - gradiant) * colour.g);
+		r =  colour_2.r - ((gradiant) * get_dif(colour_2.r, colour.r));
+		g =  colour_2.g - ((gradiant) * get_dif(colour_2.b, colour.g));
+		b =  colour_2.b - ((gradiant) * get_dif(colour_2.g, colour.b));
 	}
+	(void)colour_2;
 	return ((r * 256 * 256) + (g * 256) + b); 
 
 }

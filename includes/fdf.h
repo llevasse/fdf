@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 10:20:23 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:33:02 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ typedef struct s_line
 	int				len;
 	int				altitude_a;
 	int				altitude_b;
+	int				z_ratio;
 	t_colour		colour_a;
 	t_colour		colour_b;
-	double			z_ratio;
 }	t_line;
 
 typedef struct s_point
@@ -161,7 +161,7 @@ void			clear_line(t_data data);
 /* line.c */
 t_line			**get_all_lines(t_data data);
 t_line			*init_line(t_point *point_a, t_point *point_b, int line_id);
-double			get_z_ratio(t_line *line);
+int				get_z_ratio(t_line *line);
 void			draw_line(t_data *data, t_line *line);
 
 /* grid.c */

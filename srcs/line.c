@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/23 22:23:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:33:42 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,13 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	return (line);
 }
 
-double	get_z_ratio(t_line *line)
+int	get_z_ratio(t_line *line)
 {
-	int	len_z;
-	
 	if (line->altitude_a == line->altitude_b)
 		return (0);
 	if (line->altitude_a > line->altitude_b)
-	{
-		len_z = line->altitude_a - line->altitude_b;
-		if (line->altitude_a < 0  || line ->altitude_b < 0)
-			len_z *= -1;
-		return ((double)line->len / len_z);
-	}
-	len_z = line->altitude_b - line->altitude_a;
-	if (line->altitude_a < 0  || line ->altitude_b < 0)
-		len_z *= -1;
-	return ((double)line->len / len_z);
+		return (-1);
+	return (1);
 }
 
 void	draw_line(t_data *data, t_line *line)
