@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/22 23:22:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:56:11 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ t_data	init_data(int fd)
 	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
 	data.points = parse_points(data);
 	set_colour(&data);
+	data.beg_colour = init_colour(0, BEG_R, BEG_G, BEG_B);
+	data.zero_colour = init_colour(0, ZERO_R, ZERO_G, ZERO_B);
 	data.lines = get_all_lines(data);
 	data.highest_altitude = get_highest_altitude(data);
 	data.lowest_altitude = get_lowest_altitude(data);

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 11:33:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:54:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_data
 	t_line			**lines;
 	t_grid			grid;
 	t_img			img;
+	t_colour		beg_colour;
+	t_colour		zero_colour;
 	int				elem_per_line;
 	int				nb_line;
 	char			**line;

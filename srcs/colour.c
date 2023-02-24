@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 11:45:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 11:56:01 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	t_colour	colour_2;
 	double		gradiant;
 
+	if (line.altitude_a == 0 && line.altitude_b == 0)
+		return (data.zero_colour.colour);
 	if (line.altitude_a < line.altitude_b)
 		gradiant = (double)i / line.len;
 	else if (line.altitude_a == line.altitude_b)
@@ -86,11 +88,19 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	{
 		colour = line.colour_a;
 		colour_2 = line.colour_b;
+		if (line.altitude_a == 0)
+			colour = data.beg_colour;
+		if (line.altitude_b == 0)
+			colour_2 = data.beg_colour;
 	}
-	else
+	else if (line.altitude_a < line.altitude_b)
 	{
 		colour = line.colour_b;
 		colour_2 = line.colour_a;
+		if (line.altitude_a == 0)
+			colour_2 = data.beg_colour;
+		if (line.altitude_b == 0)
+			colour = data.beg_colour;
 	}
 	if (line.altitude_a == line.altitude_b)
 	{
