@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:26:40 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 16:52:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 10:02:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	rotate_left(t_data *data, int value)
 		data->grid.x_angle -= 360;
 	data->grid.radian_x = (data->grid.x_angle * PI) / 180;
 	data->points = parse_points(*data);
+	set_colour(data);
 	data->lines = get_all_lines(*data);
 	render(data);
 }
@@ -40,6 +41,7 @@ void	rotate_right(t_data *data, int value)
 		data->grid.x_angle -= 360;
 	data->grid.radian_x = (data->grid.x_angle * PI) / 180;
 	data->points = parse_points(*data);
+	set_colour(data);
 	data->lines = get_all_lines(*data);
 	render(data);
 }

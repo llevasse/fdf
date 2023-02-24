@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/22 23:27:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/23 22:23:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	line->len = (int)sqrt(pow(line->distance_y, 2) + pow(line->distance_x, 2));
 	line->altitude_a = point_a->value * 2;
 	line->altitude_b = point_b->value * 2;
+	line->colour_a = point_a->color;
+	line->colour_b = point_b->color;
 	if (line->altitude_a || line->altitude_b)
 		line->z_ratio = get_z_ratio(line); // try to get the ratio of altitude increase for color gradiant
 	return (line);
