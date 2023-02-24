@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 13:10:02 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:38:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,14 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	t_colour	colour_2;
 	double		gradiant;
 
-	if (line.altitude_a == 0 && line.altitude_b == 0)
-		return (data.zero_colour.colour);
 	if (line.altitude_a < line.altitude_b)
 		gradiant = (double)i / line.len;
-	else if (line.altitude_a == line.altitude_b)
-		return (line.colour_a.colour);
 	else
 		gradiant = (double)(line.len - i) / line.len;
 	if (gradiant > 1.0)
 		gradiant = 1;
 	colour = line.colour_a;
 	colour_2 = line.colour_b;
-	if (line.altitude_a == 0)
-		colour = data.beg_colour;
-	if (line.altitude_b == 0)
-		colour_2 = data.beg_colour;
 	if (line.z_ratio > 0 && line.altitude_b < 0)
 	{
 		colour = line.colour_b;
@@ -136,10 +128,10 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	if (b > 255)
 		b = 255;
 	return ((r * 256 * 256) + (g * 256) + b); 
-
+	(void)data;
 }
 
-unsigned int	get_rgb(int r, int g, int b)
+int	get_rgb(int r, int g, int b)
 {
 	return ((r * 256 * 256) + (g * 256) + b); 
 }

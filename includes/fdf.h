@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 19:05:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:31:10 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int				get_lowest_altitude(t_data data);
 unsigned int	get_colour(t_line line, int i, t_data data);
 int				get_dif(int a, int b);
 int				get_len_with_high_altitude(t_line line, t_data data);
-unsigned int	get_rgb(int r, int g, int b);
+int				get_rgb(int r, int g, int b);
 
 /* zoom.c */
 void			zoom_in(t_data *data);
@@ -185,12 +185,12 @@ void			zoom_out(t_data *data);
 void			reset_img(t_data *data);
 
 /* rotate.c */
-void	rotate_left(t_data *data, int value);
-void	rotate_right(t_data *data, int value);
+void			rotate_left(t_data *data, int value);
+void			rotate_right(t_data *data, int value);
 
 /* move.c */
-void	move_left(t_data *data, int value);
-void	move_right(t_data * data, int value);
-void	move_up(t_data *data, int value);
-void	move_down(t_data * data, int value);
+void			move_left(t_data *data, int value);
+void			move_right(t_data * data, int value);
+void			move_up(t_data *data, int value);
+void			move_down(t_data * data, int value);
 #endif
