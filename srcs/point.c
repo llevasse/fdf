@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 11:16:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:05:48 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,14 @@ void	set_colour(t_data *data)
 				BEG_R - (gradiant * get_dif(BEG_R, HIGHEST_R)),
 				BEG_G - (gradiant * get_dif(BEG_G, HIGHEST_G)),
 				BEG_B - (gradiant * get_dif(BEG_B, HIGHEST_B)));
+			}
+			else if (data->points[y][x]->value < 0)
+			{
+				gradiant = ((double)data->points[y][x]->value) * 2 / get_highest_altitude(*data);
+				data->points[y][x]->color = init_colour(0,
+				BEG_R + (gradiant * get_dif(BEG_R, LOWEST_R)),
+				BEG_G + (gradiant * get_dif(BEG_G, LOWEST_G)),
+				BEG_B + (gradiant * get_dif(BEG_B, LOWEST_B)));
 			}
 			x++;
 		}
