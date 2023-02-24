@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 19:50:57 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:10:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 		colour = line.colour_b;
 		colour_2 = line.colour_a;
 	}
-	else if (line.z_ratio >= 0)
+	r =  colour_2.r;
+	g =  colour_2.g;
+	b =  colour_2.b;
+	if (line.z_ratio >= 0)
 	{
 		r =  colour_2.r - ((1 - gradiant) * get_dif(colour_2.r, colour.r));
 		g =  colour_2.g - ((1 - gradiant) * get_dif(colour_2.g, colour.g));
