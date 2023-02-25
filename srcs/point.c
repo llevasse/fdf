@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 18:46:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:15:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_point	***parse_points(t_data data)
 		while (j < data.elem_per_line)
 		{
 			points[i][j] = init_point(data, j, i,
-					ft_atoi((const char *)*data.line));
+					(ft_atoi((const char *)*data.line)));
 			if (!points[i][j])
 				return (clear_point(data), NULL);
 			points[i][j]->color = init_colour(-1, -1, -1, -1);
@@ -39,9 +39,9 @@ t_point	***parse_points(t_data data)
 				points[i][j]->color = init_colour_from_str((const char *)*(data.line - 1));
 			points[i][j]->nb_line = data.nb_line;
 			points[i][j]->elem_per_line = data.elem_per_line;
-			points[i][j]->rotated_y -= (points[i][j]->value * 2)
+/* 			points[i][j]->rotated_y -= (points[i][j]->value * data.grid.wire_len)
 				* data.grid.zoom;
-			j++;
+ */			j++;
 		}
 		points[i][j] = NULL;
 		i++;
@@ -73,7 +73,7 @@ t_point	*init_point(t_data data, int x, int y, int z)
 		+ data.grid.x_decal;
 	new->rotated_x = new->x;
 	new->value = z;
-	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y), z);
+	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y), (z * data.grid.zoom));
 	return (new);
 }
 

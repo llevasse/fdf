@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/24 20:05:00 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/25 19:03:37 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	line->distance_x = abs(point_b->rotated_x - point_a->rotated_x);
 	line->distance_y = abs(point_b->rotated_y - point_a->rotated_y);
 	line->len = (int)sqrt(pow(line->distance_y, 2) + pow(line->distance_x, 2));
-	line->altitude_a = point_a->value * 2;
-	line->altitude_b = point_b->value * 2;
+	line->altitude_a = point_a->value;
+	line->altitude_b = point_b->value;
 	line->colour_a = point_a->color;
 	line->colour_b = point_b->color;
 	if (line->altitude_a != 0 || line->altitude_b != 0)
