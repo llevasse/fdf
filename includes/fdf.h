@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 13:16:33 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/25 18:35:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_grid
 	double	x_decal;
 	double	y_decal;
 	double	radian_x;
+	double	iso_radian;
+	int		iso_angle;
 }	t_grid;
 
 typedef	struct s_colour
@@ -130,6 +132,13 @@ typedef struct s_data
 	int				lowest_altitude;
 }	t_data;
 
+typedef struct s_matrix
+{
+	int	**matrix;
+	int	nb_rows;
+	int	nb_column;
+}	t_matrix;
+
 /* fdf.c */
 int				handle_no_event(void *data);
 int				handle_input(int keysym, t_data *data);
@@ -143,8 +152,8 @@ int				get_nb_of_element_in_array(char **str);
 
 /* point.c */
 t_point			***parse_points(t_data data);
-t_point			*init_point(t_data data, int x, int y);
-void			get_rotated_point(t_data data, int *x, int *y);
+t_point			*init_point(t_data data, int x, int y, int z);
+void			get_rotated_point(t_data data, int *x, int *y, int z);
 void			set_colour(t_data *data);
 t_colour		init_colour(int colour, int r, int g, int b);
 t_colour		init_colour_from_str(const char *str);
@@ -193,4 +202,10 @@ void			move_left(t_data *data, int value);
 void			move_right(t_data * data, int value);
 void			move_up(t_data *data, int value);
 void			move_down(t_data * data, int value);
+
+/* matrix.c */
+void	free_matrix(t_matrix *matrix);
+t_matrix	*init_matrix(int nb_rows, int nb_column);
+t_matrix	*multiplie_matrix(t_matrix matrix_a, t_matrix matrix_b);
+
 #endif

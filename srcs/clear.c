@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/21 01:09:44 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/25 15:07:46 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,18 @@ void	clear_line(t_data data)
 	free (data.lines);
 	data.lines = NULL;
 	(void)data;
+}
+
+void	free_matrix(t_matrix *matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix->matrix[i])
+	{
+		free(matrix->matrix[i]);
+		matrix->matrix[i++] = NULL;
+	}
+	free(matrix);
+	matrix = NULL;
 }
