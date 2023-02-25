@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:55:21 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/22 21:31:49 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/25 13:18:31 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@ t_grid	init_grid(void)
 	grid.wire_len = 50;
 	grid.grid_height = WINDOW_HEIGHT / 2;
 	grid.grid_width = WINDOW_WIDTH / 2;
-	grid.x_angle = 45;
+	grid.x_angle = 30;
 	grid.y_angle = 0;
 	grid.grid_z_rotation = 0;
 	grid.zoom = 1;
 	grid.x_decal = 0;
 	grid.y_decal = 0;
 	
-	/* temp */
-	grid.x_decal = 5;
-	grid.y_decal = 0;
-	grid.zoom = 1.0;
-
 	if (grid.x_angle < 0)
 		grid.x_angle += 360;
 	while (grid.x_angle > 360)
