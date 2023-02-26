@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:55:21 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/26 10:14:28 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:43:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	reset_grid(t_data *data)
 	set_colour(data);
 	data->lines = get_all_lines(*data);
 	render(data);
+	ft_printf("reset grid!\n");
 }

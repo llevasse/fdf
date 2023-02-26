@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/26 10:10:39 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:40:58 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,17 @@ void	get_rotated_point(t_data data, int *x, int *y, int z)
 	radian = data.grid.radian_x;
 	cos_rad = cos(radian);
 	sin_rad = sin(radian);
-	temp_x = (int)(*x * cos_rad) + ((double)*y
-			* cos(get_iso_radian(data.grid.x_angle, 0))) + ((double)z
-			* cos(get_iso_radian(data.grid.x_angle, 1)));
-	temp_y = (int)((double)*x * sin_rad) + ((double)*y
-			* sin(get_iso_radian(data.grid.x_angle, 0))) + ((double)z
-			* sin(get_iso_radian(data.grid.x_angle, 1)));
-
-	*x = temp_x;
-	*y = temp_y;
+	temp_x = (int)(cos_rad * (((*x - data.grid.grid_width) * cos_rad)
+				+ ((double)(*y - data.grid.grid_height)
+					* cos(get_iso_radian(data.grid.x_angle, 0))) + ((double)z
+					* cos(get_iso_radian(data.grid.x_angle, 1)))));
+	temp_y = (int)(cos_rad * (((double)(*x - data.grid.grid_width) * sin_rad)
+				+ ((double)(*y - data.grid.grid_height) * sin(get_iso_radian(data.grid.x_angle, 0)))
+				+ ((double)z * sin(get_iso_radian(data.grid.x_angle, 1)))));
+	*x = temp_x + data.grid.grid_width;
+	*y = temp_y + data.grid.grid_height;
+	(void)cos_rad;
+	(void)sin_rad;
 	(void)z;
 }
 
