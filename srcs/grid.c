@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:55:21 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 18:49:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:14:28 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@ t_grid	init_grid(void)
 		grid.iso_angle -= 360;
 	grid.iso_radian = (grid.iso_angle * PI) / 180; 
 	return (grid);
+}
+
+void	reset_grid(t_data *data)
+{
+	reset_img(data);
+	clear_point(*data);
+	clear_line(*data);
+	data->grid = init_grid();
+	data->points = parse_points(*data);
+	set_colour(data);
+	data->lines = get_all_lines(*data);
+	render(data);
 }

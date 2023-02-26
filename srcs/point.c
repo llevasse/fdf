@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 19:15:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 10:10:39 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,15 @@ t_point	***parse_points(t_data data)
 				return (clear_point(data), NULL);
 			points[i][j]->color = init_colour(-1, -1, -1, -1);
 			if (ft_is_in_str((const char *)*data.line++, ','))
-				points[i][j]->color = init_colour_from_str((const char *)*(data.line - 1));
+				points[i][j]->color = init_colour_from_str((const char *)*(data.line
+							- 1));
 			points[i][j]->nb_line = data.nb_line;
 			points[i][j]->elem_per_line = data.elem_per_line;
-/* 			points[i][j]->rotated_y -= (points[i][j]->value * data.grid.wire_len)
+			/* 			points[i][j]->rotated_y -= (points[i][j]->value
+								* data.grid.wire_len)
 				* data.grid.zoom;
- */			j++;
+ */
+			j++;
 		}
 		points[i][j] = NULL;
 		i++;
@@ -73,7 +76,8 @@ t_point	*init_point(t_data data, int x, int y, int z)
 		+ data.grid.x_decal;
 	new->rotated_x = new->x;
 	new->value = z;
-	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y), (z * data.grid.zoom));
+	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y), (z
+				* data.grid.zoom));
 	return (new);
 }
 
@@ -112,11 +116,13 @@ void	get_rotated_point(t_data data, int *x, int *y, int z)
 	temp_x = (int)(*x * cos_rad) + ((double)*y
 			* cos(get_iso_radian(data.grid.x_angle, 0))) + ((double)z
 			* cos(get_iso_radian(data.grid.x_angle, 1)));
-	temp_y = (int)(*x * sin_rad) + ((double)*y
+	temp_y = (int)((double)*x * sin_rad) + ((double)*y
 			* sin(get_iso_radian(data.grid.x_angle, 0))) + ((double)z
 			* sin(get_iso_radian(data.grid.x_angle, 1)));
+
 	*x = temp_x;
 	*y = temp_y;
+	(void)z;
 }
 
 t_colour	init_colour_from_str(const char *str)
