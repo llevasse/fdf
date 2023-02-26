@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/26 12:51:53 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 14:11:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,10 +197,11 @@ void				reset_img(t_data *data);
 /* rotate.c */
 void				rotate_left(t_data *data, int value);
 void				rotate_right(t_data *data, int value);
-void				rotate_point(t_data *data);
+void				rotate_clockwise(t_data *data);
+void				rotate_anticlockwise(t_data *data);
 
-	/* move.c */
-	void move_left(t_data *data, int value);
+/* move.c */
+void				move_left(t_data *data, int value);
 void				move_right(t_data *data, int value);
 void				move_up(t_data *data, int value);
 void				move_down(t_data *data, int value);
