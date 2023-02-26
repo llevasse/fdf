@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/26 10:11:45 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 12:43:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ move by x of %i and by y of %i \
 with a rotation of %i\n",
 	data->grid.grid_width, data->grid.grid_height, 
 	data->grid.x_decal, data->grid.y_decal,
-	data->grid.x_angle);	
+	data->grid.angle);	
 }
 
 int	render(t_data *data)

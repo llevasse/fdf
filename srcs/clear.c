@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:35:58 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 15:07:46 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/26 13:03:57 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	clear_line(t_data data)
 	int	i;
 
 	i = 1;
-	data.lines--;
+	if (!(*data.lines))
+		data.lines--;
 	while ((*data.lines)->line_id != 0 || !(*data.lines))
 	{
 		data.lines--;
