@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 17:05:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:12:07 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ int	handle_no_event(void *data)
 	return (0);
 }
 
+int	close_window(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	data->win_ptr = NULL;
+	clear_point(*data);
+	clear_line(*data);
+	clear_split(data->line);
+	return (0);
+}
+
 int	handle_input(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
-		data->win_ptr = NULL;
-		clear_point(*data);
-		clear_line(*data);
-		clear_split(data->line);
-	}
+		close_window(data);
 	if (keysym == XK_KP_Add)
 		zoom_in(data);
 	if (keysym == XK_KP_Subtract)
@@ -73,9 +77,11 @@ void	print_grid_info(t_data *data)
 	ft_printf("grid of size %ix%i\n\
 move by x of %i and by y of %i \
 with a rotation of %i\n",
-	data->grid.grid_width, data->grid.grid_height, 
-	data->grid.x_decal, data->grid.y_decal,
-	data->grid.angle);	
+				data->grid.grid_width,
+				data->grid.grid_height,
+				data->grid.x_decal,
+				data->grid.y_decal,
+				data->grid.angle);
 }
 
 int	render(t_data *data)
@@ -87,15 +93,15 @@ int	render(t_data *data)
 		draw_line(data, *data->lines);
 		data->lines++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
-		data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0,
+			0);
 	return (0);
 }
 
 t_data	init_data(int fd)
 {
-	t_data data;
-	
+	t_data	data;
+
 	data.grid = init_grid();
 	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
 	data.points = parse_points(data);
@@ -106,14 +112,13 @@ t_data	init_data(int fd)
 	data.highest_altitude = get_highest_altitude(data);
 	data.lowest_altitude = get_lowest_altitude(data);
 	data.mlx_ptr = mlx_init();
-	
 	return (data);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_data			data;
-	int				fd;
+	t_data	data;
+	int		fd;
 
 	if (argc == 1)
 		return (1);
@@ -129,10 +134,9 @@ int	main(int argc, char *argv[])
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_len, &data.img.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask,  &handle_input, &data);
-
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_input, &data);
+	mlx_hook(data.win_ptr, 17, 0, &close_window, &data);
 	mlx_loop(data.mlx_ptr);
-
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
 	(void)data.points;
