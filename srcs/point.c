@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 12:52:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:17:16 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ t_point	*init_point(t_data data, int x, int y, int z)
 	new->x = beg_x + (x * (data.grid.wire_len * data.grid.zoom))
 		+ data.grid.x_decal;
 	new->rotated_x = new->x;
-	new->value = z;
-	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y), (z
+	new->value = z * data.grid.z_amplifier;
+	get_rotated_point(data, &(new->rotated_x), &(new->rotated_y), (new->value
 				* data.grid.zoom));
 	return (new);
 }

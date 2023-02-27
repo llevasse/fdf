@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 13:43:54 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:16:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_grid
 	double			radian_x;
 	double			iso_radian;
 	int				iso_angle;
+	int				z_amplifier;
 }					t_grid;
 
 typedef struct s_colour

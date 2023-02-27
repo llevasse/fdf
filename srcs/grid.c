@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:55:21 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/26 12:43:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:19:26 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ t_grid	init_grid(void)
 		grid.iso_angle += 360;
 	while (grid.iso_angle > 360)
 		grid.iso_angle -= 360;
-	grid.iso_radian = (grid.iso_angle * PI) / 180; 
+	grid.iso_radian = (grid.iso_angle * PI) / 180;
+	/* parametter to determine the position of Z
+	z_amplifier = grid.wire_len | less visually pleasing but respect the measure 
+	z_amplifier = 1 | more visually pleasing but don't respect the measure*/
+	grid.z_amplifier = 1;
 	return (grid);
 }
 
