@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 16:46:46 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 19:03:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:20:17 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,23 @@ t_line	**get_all_lines(t_data data)
 	int				i;
 
 	i = 0;
-	line = malloc(((data.elem_per_line * data.nb_line)) * sizeof(struct s_line));
+	line = malloc(((data.elem_per_line * data.nb_line))
+			* sizeof(struct s_line));
 	while (*data.points)
 	{
 		while (**data.points)
 		{
 			if ((**data.points)->right_point && **data.points)
 			{
-				line[i] = init_line(**data.points, (**data.points)->right_point, i);
+				line[i] = init_line(**data.points, (**data.points)->right_point,
+						i);
 				if (!line[i++])
 					return (clear_line(data), NULL);
 			}
 			if ((**data.points)->below_point && **data.points)
 			{
-				line[i] = init_line(**data.points, (**data.points)->below_point, i);
+				line[i] = init_line(**data.points, (**data.points)->below_point,
+						i);
 				if (!line[i++])
 					return (clear_line(data), NULL);
 			}
@@ -48,6 +51,8 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 	struct s_line	*line;
 
 	line = malloc(sizeof(struct s_line));
+	line->point_a = point_a;
+	line->point_b = point_b;
 	line->x_a = point_a->rotated_x;
 	line->y_a = point_a->rotated_y;
 	line->x_b = point_b->rotated_x;
@@ -67,8 +72,9 @@ t_line	*init_line(t_point *point_a, t_point *point_b, int line_id)
 		if (line->altitude_b == 0 && line->altitude_a != 0)
 			line->colour_b = init_colour(0, BEG_R, BEG_G, BEG_B);
 	}
- 	if (line->altitude_a || line->altitude_b)
-		line->z_ratio = get_z_ratio(line); // try to get the ratio of altitude increase for color gradiant
+	if (line->altitude_a || line->altitude_b)
+		line->z_ratio = get_z_ratio(line);
+			// try to get the ratio of altitude increase for color gradiant
 	return (line);
 }
 
@@ -82,7 +88,7 @@ int	get_z_ratio(t_line *line)
 }
 
 void	draw_line(t_data *data, t_line *line)
-{	
+{
 	int	x;
 	int	y;
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 13:02:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:43:54 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,6 @@ typedef struct s_colour
 	int				colour;
 }					t_colour;
 
-typedef struct s_line
-{
-	int				line_id;
-	int				x_a;
-	int				x_b;
-	int				distance_x;
-	int				y_a;
-	int				y_b;
-	int				distance_y;
-	int				len;
-	int				altitude_a;
-	int				altitude_b;
-	int				z_ratio;
-	t_colour		colour_a;
-	t_colour		colour_b;
-}					t_line;
-
 typedef struct s_point
 {
 	int				tab_x;
@@ -111,6 +94,25 @@ typedef struct s_point
 	struct s_point	*above_point;
 	struct s_point	*below_point;
 }					t_point;
+
+typedef struct s_line
+{
+	int				line_id;
+	int				x_a;
+	int				x_b;
+	int				distance_x;
+	int				y_a;
+	int				y_b;
+	int				distance_y;
+	int				len;
+	int				altitude_a;
+	int				altitude_b;
+	int				z_ratio;
+	t_colour		colour_a;
+	t_colour		colour_b;
+	t_point			*point_a;
+	t_point			*point_b;
+}					t_line;
 
 typedef struct s_data
 {
@@ -171,6 +173,8 @@ void				add_below_point(t_point ***points, int i, int j,
 void				clear_split(char **str);
 void				clear_point(t_data data);
 void				clear_line(t_data data);
+void				reset_ptr_point(t_data data);
+void				reset_ptr_lines(t_data data);
 
 /* line.c */
 t_line				**get_all_lines(t_data data);
@@ -201,6 +205,7 @@ void				rotate_right(t_data *data, int value);
 void				rotate_clockwise(t_data *data);
 void				rotate_anticlockwise(t_data *data);
 void				set_point(t_data *data);
+void				set_lines(t_data *data);
 
 /* move.c */
 void				move_left(t_data *data, int value);
