@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:40:33 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 17:29:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:36:41 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 		r =  colour_2.r - ((1 - gradiant) * get_dif(colour_2.r, colour.r));
 		g =  colour_2.g - ((1 - gradiant) * get_dif(colour_2.g, colour.g));
 		b =  colour_2.b - ((1 - gradiant) * get_dif(colour_2.b, colour.b));
-		if (line.altitude_b <= 0 || line.altitude_a == line.altitude_b)
+		if (line.altitude_b < 0 || line.altitude_a == line.altitude_b)
 		{
 			r =  colour_2.r - ((gradiant) * get_dif(colour_2.r, colour.r));
 			g =  colour_2.g - ((gradiant) * get_dif(colour_2.g, colour.g));
@@ -102,9 +102,9 @@ unsigned int	get_colour(t_line line, int i, t_data data)
 	}
 	else if (line.z_ratio < 0)
 	{
-		r =  colour_2.r - (gradiant * get_dif(colour_2.r, colour.r));
-		g =  colour_2.g - (gradiant * get_dif(colour_2.b, colour.g));
-		b =  colour_2.b - (gradiant * get_dif(colour_2.g, colour.b));
+		r =  colour_2.r - ((1 - gradiant) * get_dif(colour_2.r, colour.r));
+		g =  colour_2.g - ((1 - gradiant) * get_dif(colour_2.b, colour.g));
+		b =  colour_2.b - ((1 - gradiant) * get_dif(colour_2.g, colour.b));
 		if (line.altitude_b <= 0)
 		{
 			r =  colour.r - ((1 - gradiant) * get_dif(colour.r, colour_2.r));
