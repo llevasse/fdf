@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/26 14:11:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:02:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void				get_rotated_point(t_data data, int *x, int *y, int z);
 void				set_colour(t_data *data);
 t_colour			init_colour(int colour, int r, int g, int b);
 t_colour			init_colour_from_str(const char *str);
+double				get_iso_radian(int angle, int minus);
 int					hex2int(char byte);
 
 /* connect.c */
@@ -199,6 +200,7 @@ void				rotate_left(t_data *data, int value);
 void				rotate_right(t_data *data, int value);
 void				rotate_clockwise(t_data *data);
 void				rotate_anticlockwise(t_data *data);
+void				set_point(t_data *data);
 
 /* move.c */
 void				move_left(t_data *data, int value);

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:26:40 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 12:19:05 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:03:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	rotate_left(t_data *data, int value)
 {
 	reset_img(data);
- 	clear_point(*data);
+	/* 	clear_point(*data);
+ */
 	clear_line(*data);
 	data->grid.angle += value;
 	if (data->grid.angle < 0)
@@ -23,16 +24,15 @@ void	rotate_left(t_data *data, int value)
 	while (data->grid.angle > 360)
 		data->grid.angle -= 360;
 	data->grid.radian_x = (data->grid.angle * PI) / 180;
-		data->grid.iso_angle = data->grid.angle + 120;
+	data->grid.iso_angle = data->grid.angle + 120;
 	if (data->grid.iso_angle < 0)
 		data->grid.iso_angle += 360;
 	while (data->grid.iso_angle > 360)
 		data->grid.iso_angle -= 360;
 	data->grid.iso_radian = (data->grid.iso_angle * PI) / 180;
-	data->points = parse_points(*data);
-
-/* 	rotate_clockwise(data);
+	/* 	data->points = parse_points(*data);
  */
+	set_point(data);
 	set_colour(data);
 	data->lines = get_all_lines(*data);
 	render(data);
@@ -41,7 +41,8 @@ void	rotate_left(t_data *data, int value)
 void	rotate_right(t_data *data, int value)
 {
 	reset_img(data);
- 	clear_point(*data);
+	/* 	clear_point(*data);
+ */
 	clear_line(*data);
 	data->grid.angle -= value;
 	if (data->grid.angle < 0)
@@ -49,19 +50,61 @@ void	rotate_right(t_data *data, int value)
 	while (data->grid.angle > 360)
 		data->grid.angle -= 360;
 	data->grid.radian_x = (data->grid.angle * PI) / 180;
-		data->grid.iso_angle = data->grid.angle + 120;
+	data->grid.iso_angle = data->grid.angle + 120;
 	if (data->grid.iso_angle < 0)
 		data->grid.iso_angle += 360;
 	while (data->grid.iso_angle > 360)
 		data->grid.iso_angle -= 360;
 	data->grid.iso_radian = (data->grid.iso_angle * PI) / 180;
-	data->points = parse_points(*data);
-
-/* 	rotate_anticlockwise(data);
+	set_point(data);
+	/* 	data->points = parse_points(*data);
  */
 	set_colour(data);
 	data->lines = get_all_lines(*data);
 	render(data);
+}
+
+void	set_point(t_data *data)
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	int	z;
+
+	i = 0;
+	if (data->points[0][0] == NULL)
+	{
+		while (i < data->nb_line)
+			data->points[i++] -= data->elem_per_line;
+	}
+	i = 0;
+	while (data->points[i])
+	{
+		j = 0;
+		while (data->points[i][j])
+		{
+			x = data->points[i][j]->x;
+			y = data->points[i][j]->y;
+			z = data->points[i][j]->value;
+			data->points[i][j]->rotated_x = (int)((((double)(x
+								- data->grid.grid_width)
+							* cos(data->grid.radian_x)) + ((double)(y
+								- data->grid.grid_height)
+							* cos(data->grid.iso_radian)) + ((double)z
+							* cos(get_iso_radian(data->grid.angle, 1)))));
+			data->points[i][j]->rotated_y = (int)((((double)(x
+								- data->grid.grid_width)
+							* sin(data->grid.radian_x)) + ((double)(y
+								- data->grid.grid_height)
+							* sin(data->grid.iso_radian)) + ((double)z
+							* sin(get_iso_radian(data->grid.angle, 1)))));
+			data->points[i][j]->rotated_x += data->grid.grid_width;
+			data->points[i][j]->rotated_y += data->grid.grid_height;
+			j++;
+		}
+		i++;
+	}
 }
 
 void	rotate_clockwise(t_data *data)
@@ -85,11 +128,13 @@ void	rotate_clockwise(t_data *data)
 			x = 1;
 		while (data->points[y][x])
 		{
-			temp_x = ((double)(data->points[y][x]->rotated_x - data->grid.grid_width)
-					* cos(data->grid.radian_x) + (double)(data->points[y][x]->rotated_y
+			temp_x = ((double)(data->points[y][x]->rotated_x
+						- data->grid.grid_width) * cos(data->grid.radian_x)
+					+ (double)(data->points[y][x]->rotated_y
 						- data->grid.grid_height) * sin(data->grid.radian_x));
-			temp_y = ((double)-(data->points[y][x]->rotated_x - data->grid.grid_width)
-					* sin(data->grid.radian_x) + (double)(data->points[y][x]->rotated_y
+			temp_y = ((double)-(data->points[y][x]->rotated_x
+						- data->grid.grid_width) * sin(data->grid.radian_x)
+					+ (double)(data->points[y][x]->rotated_y
 						- data->grid.grid_height) * cos(data->grid.radian_x));
 			data->points[y][x]->rotated_x = temp_x + data->grid.grid_width;
 			data->points[y][x++]->rotated_y = temp_y + data->grid.grid_height;
@@ -118,12 +163,16 @@ void	rotate_anticlockwise(t_data *data)
 			x = 1;
 		while (data->points[y][x])
 		{
-			temp_x = (((double)(data->points[y][x]->rotated_x - data->grid.grid_width)
-					* cos(data->grid.radian_x)) - ((double)(data->points[y][x]->rotated_y
-						- data->grid.grid_height) * sin(data->grid.radian_x)));
-			temp_y = (((double)(data->points[y][x]->rotated_x - data->grid.grid_width)
-					* sin(data->grid.radian_x)) + ((double)(data->points[y][x]->rotated_y
-						- data->grid.grid_height) * cos(data->grid.radian_x)));
+			temp_x = (((double)(data->points[y][x]->rotated_x
+							- data->grid.grid_width) * cos(data->grid.radian_x))
+					- ((double)(data->points[y][x]->rotated_y
+							- data->grid.grid_height)
+						* sin(data->grid.radian_x)));
+			temp_y = (((double)(data->points[y][x]->rotated_x
+							- data->grid.grid_width) * sin(data->grid.radian_x))
+					+ ((double)(data->points[y][x]->rotated_y
+							- data->grid.grid_height)
+						* cos(data->grid.radian_x)));
 			data->points[y][x]->rotated_x = temp_x + data->grid.grid_width;
 			data->points[y][x++]->rotated_y = temp_y + data->grid.grid_height;
 		}
