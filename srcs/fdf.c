@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 17:12:07 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:36:10 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	handle_input(int keysym, t_data *data)
 		move_down(data, 30);
 	if (keysym == XK_r || keysym == XK_R)
 		reset_grid(data);
-	print_grid_info(data);
+	if (keysym == XK_p || keysym == XK_P)
+		print_grid_info(data);
 	return (0);
 }
 
@@ -74,14 +75,11 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 
 void	print_grid_info(t_data *data)
 {
-	ft_printf("grid of size %ix%i\n\
-move by x of %i and by y of %i \
-with a rotation of %i\n",
-				data->grid.grid_width,
-				data->grid.grid_height,
-				data->grid.x_decal,
-				data->grid.y_decal,
-				data->grid.angle);
+	ft_printf("grid of size %ix", data->grid.grid_width);
+	ft_printf("%i\n", data->grid.grid_height);
+	ft_printf("moved by x of %i", (int)data->grid.x_decal);
+	ft_printf("and by y of %i", (int)data->grid.y_decal);
+	ft_printf("with a rotation of %i\n", data->grid.angle);
 }
 
 int	render(t_data *data)
