@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:46:43 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/25 15:08:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 21:37:59 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_matrix	*multiplie_matrix(t_matrix matrix_a, t_matrix matrix_b)
 {
-	struct s_matrix *matrix_c;
+	struct s_matrix	*matrix_c;
 	int				rows;
 	int				column;
 	int				temp;
@@ -35,7 +35,8 @@ t_matrix	*multiplie_matrix(t_matrix matrix_a, t_matrix matrix_b)
 			temp = 0;
 			while (temp <= matrix_c->nb_column)
 			{
-				sum +=	matrix_a.matrix[rows][temp] * matrix_b.matrix[temp][column];
+				sum += matrix_a.matrix[rows][temp]
+					* matrix_b.matrix[temp][column];
 				temp++;
 			}
 			matrix_c->matrix[rows][column++] = sum;
@@ -51,27 +52,20 @@ t_matrix	*init_matrix(int nb_rows, int nb_column)
 	int				i;
 
 	i = 0;
-	matrix = (s_matrix *)malloc(sizeof(struct s_matrix));
+	matrix = malloc(sizeof(struct s_matrix));
 	if (!matrix)
 		return (NULL);
 	matrix->nb_column = nb_column;
 	matrix->nb_rows = nb_rows;
-	matrix->matrix = (int **)malloc((nb_rows + 1) * sizeof(int *));
+	matrix->matrix = (int **)malloc((nb_rows) * sizeof(int *));
 	if (!matrix->matrix)
-	{
-		free_matrix(matrix);
-		return (NULL);	
-	}
+		return (free_matrix(matrix), NULL);
 	matrix->matrix[nb_rows] = NULL;
 	while (i < nb_rows)
 	{
-		matrix->matrix[i] = (int *)malloc((nb_column + 1) * sizeof(int));
+		matrix->matrix[i] = (int *)malloc((nb_column) * sizeof(int));
 		if (!matrix->matrix[i])
-		{
-			free_matrix(matrix);
-			return (NULL);
-		}
-		matrix->matrix[i++][nb_column] = NULL;
+			return (free_matrix(matrix), NULL);
 	}
 	return (matrix);
 }
