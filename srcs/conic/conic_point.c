@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 22:46:54 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 23:31:37 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:45:51 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../includes/fdf.h"
 
-static t_point	***parse_point_conic(t_data data)
+t_point	***parse_point_conic(t_data data)
 {
 	int		i;
 	int		j;
@@ -47,10 +47,9 @@ static t_point	***parse_point_conic(t_data data)
 	points[i] = NULL;
 	return (connect_points(points, data), points);
 }
-static t_point	*init_point_conic(t_data data, int x, int y, int z)
+t_point	*init_point_conic(t_data data, int x, int y, int z)
 {
 	int				beg_x;
-	int				beg_y;
 	struct s_point	*new;
 
 	new = malloc(sizeof(struct s_point));
@@ -59,17 +58,16 @@ static t_point	*init_point_conic(t_data data, int x, int y, int z)
 	new->tab_y = y;
 	new->tab_x = x;
 	beg_x = data.grid.grid_width;
-	beg_y = 0;
 	new->x = beg_x + (x * data.grid.wire_len);
 	new->y = 0;
 	if (x != 0)
 		rotate_point_conic(data, &(new->rotated_x), &(new->rotated_y), 180
 				* ((double)x / (data.elem_per_line - 1)));
-	new->value = z * data.grid.z_amplifier;
-	return (new);	
+	new->value = z *data.grid.z_amplifier;
+	return (new);
 }
 
-static void	rotate_point_conic(t_data data, int *x, int *y, int angle)
+void	rotate_point_conic(t_data data, int *x, int *y, int angle)
 {
 	int temp_x;
 	int temp_y;

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 22:23:25 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:43:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	render(t_data *data)
 		return (1);
 	while (*data->lines)
 	{
-		draw_line(data, *data->lines);
+		draw_line(data, *data->lines, &data->img);
 		data->lines++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0,
@@ -105,9 +105,11 @@ t_data	init_data(int fd)
 	data.grid = init_grid();
 	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
 	data.points = parse_points(data);
+	data.points_conic = parse_point_conic(data);
 	set_colour(&data);
 	data.beg_colour = init_colour(0, BEG_R, BEG_G, BEG_B);
 	data.zero_colour = init_colour(0, ZERO_R, ZERO_G, ZERO_B);
+	data.lines_conic = get_all_conic_lines(data);
 	data.lines = get_all_lines(data);
 	data.highest_altitude = get_highest_altitude(data);
 	data.lowest_altitude = get_lowest_altitude(data);

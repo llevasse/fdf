@@ -6,13 +6,13 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 22:52:25 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 22:55:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:45:30 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../includes/fdf.h"
 
-static void	clear_conic_point(t_data data)
+void	clear_conic_point(t_data data)
 {
 	int	x;
 	int	y;
@@ -36,7 +36,7 @@ static void	clear_conic_point(t_data data)
 	data.points_conic = NULL;
 }
 
-static void	clear_conic_line(t_data data)
+void	clear_conic_line(t_data data)
 {
 	int i;
 

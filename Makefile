@@ -6,24 +6,28 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/28 21:35:51 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/28 23:43:36 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAGS			= -Wall -Werror -Wextra
 
-FILES			=	srcs/fdf.c				\
-					srcs/point.c			\
-					srcs/connect.c			\
-					srcs/clear.c			\
-					srcs/line.c				\
-					srcs/grid.c				\
-					srcs/parsing_data.c		\
-					srcs/colour.c			\
-					srcs/zoom.c				\
-					srcs/rotate.c			\
-					srcs/move.c				\
-					srcs/matrix.c			\
+FILES			=	srcs/fdf.c							\
+					srcs/point.c						\
+					srcs/connect.c						\
+					srcs/clear.c						\
+					srcs/line.c							\
+					srcs/grid.c							\
+					srcs/parsing_data.c					\
+					srcs/colour.c						\
+					srcs/zoom.c							\
+					srcs/rotate.c						\
+					srcs/move.c							\
+					srcs/matrix.c						\
+					srcs/conic/conic_clear.c			\
+					srcs/conic/conic_point.c			\
+					srcs/conic/conic_lines.c			\
+					srcs/conic/conic.c					\
 
 LIBFT_FILES		=	libft/ft_putstr_fd.c \
 					libft/ft_strchr.c \

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 23:28:12 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:46:18 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void				reset_ptr_lines(t_data data);
 t_line				**get_all_lines(t_data data);
 t_line				*init_line(t_point *point_a, t_point *point_b, int line_id);
 int					get_z_ratio(t_line *line);
-void				draw_line(t_data *data, t_line *line);
+void				draw_line(t_data *data, t_line *line, t_img *img);
 
 /* grid.c */
 t_grid				init_grid(void);
@@ -225,15 +225,18 @@ t_matrix			*init_matrix(int nb_rows, int nb_column);
 t_matrix			*multiplie_matrix(t_matrix matrix_a, t_matrix matrix_b);
 
 /* conic.c */
-void				render_conic(t_data *data);
+int				render_conic(t_data *data);
 
 /* conic_point.c */
-static t_point		***parse_point_conic(t_data data);
-static t_point		*init_point_conic(t_data data, int x, int y, int z);
-static void			rotate_point_conic(t_data data, int *x, int *y, int angle);
+t_point		***parse_point_conic(t_data data);
+t_point		*init_point_conic(t_data data, int x, int y, int z);
+void			rotate_point_conic(t_data data, int *x, int *y, int angle);
 
 /* conic_clear.c */
-static void			clear_conic_point(t_data data);
-static void			clear_conic_line(t_data data);
+void			clear_conic_point(t_data data);
+void			clear_conic_line(t_data data);
+
+/* conic_lines.c */
+t_line		**get_all_conic_lines(t_data data);
 
 #endif
