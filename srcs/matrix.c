@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:46:43 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 21:37:59 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 22:01:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,4 @@ t_matrix	*init_matrix(int nb_rows, int nb_column)
 	}
 	return (matrix);
 }
+

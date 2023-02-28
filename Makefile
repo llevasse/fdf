@@ -6,7 +6,7 @@
 #    By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 12:10:12 by llevasse          #+#    #+#              #
-#    Updated: 2023/02/25 17:59:14 by llevasse         ###   ########.fr        #
+#    Updated: 2023/02/28 21:35:51 by llevasse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES			=	srcs/fdf.c				\
 					srcs/zoom.c				\
 					srcs/rotate.c			\
 					srcs/move.c				\
+					srcs/matrix.c			\
 
 LIBFT_FILES		=	libft/ft_putstr_fd.c \
 					libft/ft_strchr.c \
@@ -104,6 +105,11 @@ alldebug:		bin/$(EXECUTABLE)
 run:			cleandebug alldebug
 					clear
 					./bin/$(EXECUTABLE) $(VAR)
+
+run_test:		cleandebug alldebug
+					clear
+					./bin/$(EXECUTABLE) test_files/test.fdf
+
 
 run_vs_code: cleandebug alldebug
 	clear

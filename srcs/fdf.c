@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 11:03:32 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 22:23:25 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	handle_input(int keysym, t_data *data)
 		reset_grid(data);
 	if (keysym == XK_p || keysym == XK_P)
 		print_grid_info(data);
+	if (keysym == XK_c || keysym == XK_C)
+		render_conic(data);
 	return (0);
 }
 
@@ -131,6 +133,10 @@ int	main(int argc, char *argv[])
 	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
 			&data.img.line_len, &data.img.endian);
+	data.img_conic.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,
+			WINDOW_HEIGHT);
+	data.img_conic.addr = mlx_get_data_addr(data.img_conic.mlx_img, &data.img_conic.bpp,
+			&data.img_conic.line_len, &data.img_conic.endian);
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_input, &data);
 	mlx_hook(data.win_ptr, 17, 0, &close_window, &data);

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 11:02:35 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:28:12 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_grid
 	int				wire_len;
 	int				angle;
 	int				grid_z_rotation;
-	int    			x_decal;
-	int    			y_decal;
+	int				x_decal;
+	int				y_decal;
 	double			radian_x;
 	double			iso_radian;
 	int				iso_angle;
@@ -115,6 +115,13 @@ typedef struct s_line
 	t_point			*point_b;
 }					t_line;
 
+typedef struct s_matrix
+{
+	int				**matrix;
+	int				nb_rows;
+	int				nb_column;
+}					t_matrix;
+
 typedef struct s_data
 {
 	void			*mlx_ptr;
@@ -130,14 +137,10 @@ typedef struct s_data
 	char			**line;
 	int				highest_altitude;
 	int				lowest_altitude;
+	t_img			img_conic;
+	t_point			***points_conic;
+	t_line			**lines_conic;
 }					t_data;
-
-typedef struct s_matrix
-{
-	int				**matrix;
-	int				nb_rows;
-	int				nb_column;
-}					t_matrix;
 
 /* fdf.c */
 int					handle_no_event(void *data);
@@ -206,7 +209,8 @@ void				rotate_right(t_data *data, int value);
 void				rotate_clockwise(t_data *data);
 void				rotate_anticlockwise(t_data *data);
 void				set_point(t_data *data);
-void				set_point_follow_up(t_data data, t_point point, int *x, int *y);
+void				set_point_follow_up(t_data data, t_point point, int *x,
+						int *y);
 void				set_lines(t_data *data);
 
 /* move.c */
@@ -219,5 +223,17 @@ void				move_down(t_data *data, int value);
 void				free_matrix(t_matrix *matrix);
 t_matrix			*init_matrix(int nb_rows, int nb_column);
 t_matrix			*multiplie_matrix(t_matrix matrix_a, t_matrix matrix_b);
+
+/* conic.c */
+void				render_conic(t_data *data);
+
+/* conic_point.c */
+static t_point		***parse_point_conic(t_data data);
+static t_point		*init_point_conic(t_data data, int x, int y, int z);
+static void			rotate_point_conic(t_data data, int *x, int *y, int angle);
+
+/* conic_clear.c */
+static void			clear_conic_point(t_data data);
+static void			clear_conic_line(t_data data);
 
 #endif
