@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 17:16:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 11:02:35 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_grid
 	int				wire_len;
 	int				angle;
 	int				grid_z_rotation;
-	double			x_decal;
-	double			y_decal;
+	int    			x_decal;
+	int    			y_decal;
 	double			radian_x;
 	double			iso_radian;
 	int				iso_angle;
@@ -206,6 +206,7 @@ void				rotate_right(t_data *data, int value);
 void				rotate_clockwise(t_data *data);
 void				rotate_anticlockwise(t_data *data);
 void				set_point(t_data *data);
+void				set_point_follow_up(t_data data, t_point point, int *x, int *y);
 void				set_lines(t_data *data);
 
 /* move.c */

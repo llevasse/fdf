@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 01:26:40 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 13:56:19 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 10:59:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,26 @@ void	set_point(t_data *data)
 		j = 0;
 		while (data->points[i][j])
 		{
-			x = data->points[i][j]->x;
-			y = data->points[i][j]->y;
-			get_rotated_point(*data, &x, &y, (data->points[i][j]->value));
+			set_point_follow_up(*data, *(data->points[i][j]), &x, &y);
 			data->points[i][j]->rotated_x = x;
 			data->points[i][j++]->rotated_y = y;
 		}
 		i++;
 	}
+}
+
+void	set_point_follow_up(t_data data, t_point point, int *x, int *y)
+{
+	int beg_x;
+	int beg_y;
+
+	beg_y = data.grid.grid_height - ((data.grid.wire_len * data.grid.zoom)
+			* (data.nb_line / 2));
+	beg_x = data.grid.grid_width - ((data.grid.wire_len * data.grid.zoom)
+			* (data.elem_per_line / 2));
+	*y = beg_y + (point.tab_y * (data.grid.wire_len * data.grid.zoom))
+		+ data.grid.y_decal;
+	*x = beg_x + (point.tab_x * (data.grid.wire_len * data.grid.zoom))
+		+ data.grid.x_decal;
+	get_rotated_point(data, x, y, point.value);
 }

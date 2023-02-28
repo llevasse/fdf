@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 10:36:10 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/02/28 11:03:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	print_grid_info(t_data *data)
 {
 	ft_printf("grid of size %ix", data->grid.grid_width);
 	ft_printf("%i\n", data->grid.grid_height);
-	ft_printf("moved by x of %i", (int)data->grid.x_decal);
-	ft_printf("and by y of %i", (int)data->grid.y_decal);
+	ft_printf("moved by x of %i ", data->grid.x_decal);
+	ft_printf("and by y of %i ", data->grid.y_decal);
 	ft_printf("with a rotation of %i\n", data->grid.angle);
 }
 
