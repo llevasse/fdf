@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 23:43:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:34:36 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	handle_no_event(void *data)
 int	close_window(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->img_isometric.mlx_img);
+	mlx_destroy_image(data->mlx_ptr, data->img_conic.mlx_img);
 	data->win_ptr = NULL;
 	clear_point(*data);
 	clear_line(*data);
@@ -82,6 +83,34 @@ void	print_grid_info(t_data *data)
 	ft_printf("moved by x of %i ", data->grid.x_decal);
 	ft_printf("and by y of %i ", data->grid.y_decal);
 	ft_printf("with a rotation of %i\n", data->grid.angle);
+	print_point_info(data);
+}
+void	print_point_info(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	if (data->points_conic[0][0] == NULL)
+	{
+		while (y < data->nb_line)
+			data->points_conic[y++] -= data->elem_per_line;
+	}
+	y = 0;
+	while (data->points_conic[y])
+	{
+		x = 0;
+		ft_printf("| ");
+		while (data->points_conic[y][x])
+		{
+			ft_printf("{%i.%i.%i} | ", data->points_conic[y][x]->rotated_x,
+					data->points_conic[y][x]->rotated_y,
+					data->points_conic[y][x]->value);
+			x++;
+		}
+		ft_printf("\n");
+		y++;
+	}
 }
 
 int	render(t_data *data)
@@ -90,11 +119,11 @@ int	render(t_data *data)
 		return (1);
 	while (*data->lines)
 	{
-		draw_line(data, *data->lines, &data->img);
+		draw_line(data, *data->lines, &data->img_isometric);
 		data->lines++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0,
-			0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->current_img->mlx_img, 0, 0);
 	return (0);
 }
 
@@ -132,13 +161,19 @@ int	main(int argc, char *argv[])
 			"fdf");
 	if (!data.win_ptr)
 		return (free(data.win_ptr), 1);
-	data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
-			&data.img.line_len, &data.img.endian);
+	data.img_isometric.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,
+			WINDOW_HEIGHT);
+	data.img_isometric.addr = mlx_get_data_addr(data.img_isometric.mlx_img,
+												&data.img_isometric.bpp,
+												&data.img_isometric.line_len,
+												&data.img_isometric.endian);
 	data.img_conic.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,
 			WINDOW_HEIGHT);
-	data.img_conic.addr = mlx_get_data_addr(data.img_conic.mlx_img, &data.img_conic.bpp,
-			&data.img_conic.line_len, &data.img_conic.endian);
+	data.img_conic.addr = mlx_get_data_addr(data.img_conic.mlx_img,
+											&data.img_conic.bpp,
+											&data.img_conic.line_len,
+											&data.img_conic.endian);
+	data.current_img = &data.img_isometric;
 	mlx_loop_hook(data.mlx_ptr, &render, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &handle_input, &data);
 	mlx_hook(data.win_ptr, 17, 0, &close_window, &data);

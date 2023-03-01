@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 23:46:18 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:31:03 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,13 @@ typedef struct s_matrix
 
 typedef struct s_data
 {
+	t_img			*current_img;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_point			***points;
 	t_line			**lines;
 	t_grid			grid;
-	t_img			img;
+	t_img			img_isometric;
 	t_colour		beg_colour;
 	t_colour		zero_colour;
 	int				elem_per_line;
@@ -148,9 +149,10 @@ int					handle_input(int keysym, t_data *data);
 void				img_pix_put(t_img *img, int x, int y, int color);
 int					render(t_data *data);
 void				print_grid_info(t_data *data);
+void	print_point_info(t_data *data);
 
-/* parsing_data.c */
-char				**get_data(int *nb_line, int *len, int fd);
+	/* parsing_data.c */
+	char **get_data(int *nb_line, int *len, int fd);
 int					get_nb_of_element_in_array(char **str);
 
 /* point.c */
@@ -225,18 +227,18 @@ t_matrix			*init_matrix(int nb_rows, int nb_column);
 t_matrix			*multiplie_matrix(t_matrix matrix_a, t_matrix matrix_b);
 
 /* conic.c */
-int				render_conic(t_data *data);
+int					render_conic(t_data *data);
 
 /* conic_point.c */
-t_point		***parse_point_conic(t_data data);
-t_point		*init_point_conic(t_data data, int x, int y, int z);
-void			rotate_point_conic(t_data data, int *x, int *y, int angle);
+t_point				***parse_point_conic(t_data data);
+t_point				*init_point_conic(t_data data, int x, int y, int z);
+void				rotate_point_conic(t_data data, int *x, int *y, int angle);
 
 /* conic_clear.c */
-void			clear_conic_point(t_data data);
-void			clear_conic_line(t_data data);
+void				clear_conic_point(t_data data);
+void				clear_conic_line(t_data data);
 
 /* conic_lines.c */
-t_line		**get_all_conic_lines(t_data data);
+t_line				**get_all_conic_lines(t_data data);
 
 #endif

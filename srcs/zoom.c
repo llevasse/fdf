@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 00:47:41 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 11:09:42 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:19:45 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	reset_img(t_data *data)
 	{
 		x = 0;
 		while (x < WINDOW_WIDTH)
-			img_pix_put(&data->img, x++, y, BG);
+			img_pix_put(data->current_img, x++, y, BG);
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.mlx_img, 0,
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->current_img->mlx_img, 0,
 			0);
 }

@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 22:46:54 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/28 23:45:51 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:38:55 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ t_point	*init_point_conic(t_data data, int x, int y, int z)
 	new->tab_x = x;
 	beg_x = data.grid.grid_width;
 	new->x = beg_x + (x * data.grid.wire_len);
-	new->y = 0;
-	if (x != 0)
-		rotate_point_conic(data, &(new->rotated_x), &(new->rotated_y), 180
+	new->y = y;
+	new->rotated_x = new->x;
+	new->rotated_y = new->y;
+/* 	if (x != 0 || y != 0)
+ */		rotate_point_conic(data, &(new->rotated_x), &(new->rotated_y), 180
 				* ((double)x / (data.elem_per_line - 1)));
 	new->value = z *data.grid.z_amplifier;
 	return (new);
@@ -71,14 +73,13 @@ void	rotate_point_conic(t_data data, int *x, int *y, int angle)
 {
 	int temp_x;
 	int temp_y;
-	int radian;
+	double radian;
 
-	radian = (angle * PI) / 180;
+	radian = ((double)(angle) * PI) / 180;
 
-	temp_x = cos(radian) * (*x - data.grid.grid_width) - sin(radian) * (*y - 0)
-		+ data.grid.grid_width;
-	temp_y = sin(radian) * (*x - data.grid.grid_width) + cos(radian) * (*y - 0)
-		+ 0;
-	*x = temp_x;
+	temp_x = (int)(cos(radian) * (*x - data.grid.grid_width) - sin(radian) * *y);
+	temp_y = (int)(sin(radian) * (*x - data.grid.grid_width) + cos(radian) * *y);
+	*x = temp_x + data.grid.grid_width;
 	*y = temp_y;
+	(void)data;
 }
