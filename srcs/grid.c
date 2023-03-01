@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:55:21 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 17:19:26 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:47:04 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	reset_grid(t_data *data)
 	clear_line(*data);
 	data->grid = init_grid();
 	data->points = parse_points(*data);
-	set_colour(data);
+	set_colour_iso(data);
 	data->lines = get_all_lines(*data);
 	render(data);
 	ft_printf("reset grid!\n");

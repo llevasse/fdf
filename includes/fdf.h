@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:58:01 by llevasse          #+#    #+#             */
-/*   Updated: 2023/03/01 19:31:03 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:45:32 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,17 +149,17 @@ int					handle_input(int keysym, t_data *data);
 void				img_pix_put(t_img *img, int x, int y, int color);
 int					render(t_data *data);
 void				print_grid_info(t_data *data);
-void	print_point_info(t_data *data);
+void				print_point_info(t_data *data);
 
-	/* parsing_data.c */
-	char **get_data(int *nb_line, int *len, int fd);
+/* parsing_data.c */
+char				**get_data(int *nb_line, int *len, int fd);
 int					get_nb_of_element_in_array(char **str);
 
 /* point.c */
 t_point				***parse_points(t_data data);
 t_point				*init_point(t_data data, int x, int y, int z);
 void				get_rotated_point(t_data data, int *x, int *y, int z);
-void				set_colour(t_data *data);
+void				set_colour_iso(t_data *data);
 t_colour			init_colour(int colour, int r, int g, int b);
 t_colour			init_colour_from_str(const char *str);
 double				get_iso_radian(int angle, int minus);
@@ -233,6 +233,7 @@ int					render_conic(t_data *data);
 t_point				***parse_point_conic(t_data data);
 t_point				*init_point_conic(t_data data, int x, int y, int z);
 void				rotate_point_conic(t_data data, int *x, int *y, int angle);
+void				set_colour_conic(t_data *data);
 
 /* conic_clear.c */
 void				clear_conic_point(t_data data);

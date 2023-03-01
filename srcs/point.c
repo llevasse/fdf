@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:39 by llevasse          #+#    #+#             */
-/*   Updated: 2023/02/27 17:17:16 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:44:15 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int	hex2int(char byte)
 	return ((int)byte);
 }
 
-void	set_colour(t_data *data)
+void	set_colour_iso(t_data *data)
 {
 	int		y;
 	int		x;

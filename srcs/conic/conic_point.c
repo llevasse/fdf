@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 22:46:54 by llevasse          #+#    #+#             */
-/*   Updated: 2023/03/01 19:38:55 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:46:09 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,91 @@ t_point	*init_point_conic(t_data data, int x, int y, int z)
 	new->tab_x = x;
 	beg_x = data.grid.grid_width;
 	new->x = beg_x + (x * data.grid.wire_len);
-	new->y = y;
+	new->y = 0;
 	new->rotated_x = new->x;
 	new->rotated_y = new->y;
-/* 	if (x != 0 || y != 0)
- */		rotate_point_conic(data, &(new->rotated_x), &(new->rotated_y), 180
-				* ((double)x / (data.elem_per_line - 1)));
+	/* 	if (x != 0 || y != 0)
+ */
+	rotate_point_conic(data, &(new->rotated_x), &(new->rotated_y), 180
+			* ((double)x / (data.elem_per_line - 1)));
 	new->value = z *data.grid.z_amplifier;
 	return (new);
 }
 
 void	rotate_point_conic(t_data data, int *x, int *y, int angle)
 {
-	int temp_x;
-	int temp_y;
-	double radian;
+	int		temp_x;
+	int		temp_y;
+	double	radian;
 
-	radian = ((double)(angle) * PI) / 180;
-
-	temp_x = (int)(cos(radian) * (*x - data.grid.grid_width) - sin(radian) * *y);
-	temp_y = (int)(sin(radian) * (*x - data.grid.grid_width) + cos(radian) * *y);
+	radian = ((double)(angle)*PI) / 180;
+	temp_x = (int)(cos(radian) * (*x - data.grid.grid_width) - sin(radian)
+			* *y);
+	temp_y = (int)(sin(radian) * (*x - data.grid.grid_width) + cos(radian)
+			* *y);
 	*x = temp_x + data.grid.grid_width;
 	*y = temp_y;
 	(void)data;
+}
+
+void	set_colour_conic(t_data *data)
+{
+	int y;
+	int x;
+	double gradiant;
+
+	y = 0;
+	while (data->points_conic[y])
+	{
+		x = 0;
+		while (data->points_conic[y][x] && data->points_conic[y][x]->color.colour != -1)
+			x++;
+		while (data->points_conic[y][x])
+		{
+			if (data->points_conic[y][x]->value == 0)
+				data->points_conic[y][x]->color = init_colour(0, ZERO_R, ZERO_G,
+						ZERO_B);
+			else if ((data->points_conic[y][x]->value)
+					* 2 == get_highest_altitude(*data))
+				data->points_conic[y][x]->color = init_colour(0, HIGHEST_R, HIGHEST_G,
+						HIGHEST_B);
+			else if ((data->points_conic[y][x]->value)
+					* 2 == get_lowest_altitude(*data))
+				data->points_conic[y][x]->color = init_colour(0, LOWEST_R, LOWEST_G,
+						LOWEST_B);
+			else if (data->points_conic[y][x]->value > 0)
+			{
+				gradiant = ((double)data->points_conic[y][x]->value) * 2
+					/ get_highest_altitude(*data);
+				data->points_conic[y][x]->color = init_colour(0,
+														BEG_R - (gradiant
+																* get_dif(BEG_R,
+																	HIGHEST_R)),
+														BEG_G - (gradiant
+																* get_dif(BEG_G,
+																	HIGHEST_G)),
+														BEG_B - (gradiant
+																* get_dif(BEG_B,
+																	HIGHEST_B)));
+			}
+			else if (data->points_conic[y][x]->value < 0)
+			{
+				gradiant = ((double)data->points_conic[y][x]->value) * 2
+					/ get_highest_altitude(*data);
+				data->points_conic[y][x]->color = init_colour(0,
+														BEG_R + (gradiant
+																* get_dif(BEG_R,
+																	LOWEST_R)),
+														BEG_G + (gradiant
+																* get_dif(BEG_G,
+																	LOWEST_G)),
+														BEG_B + (gradiant
+																* get_dif(BEG_B,
+																	LOWEST_B)));
+			}
+			x++;
+		}
+		y++;
+	}
+	return ;
 }

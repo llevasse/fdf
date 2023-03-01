@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/03/01 19:34:36 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:46:20 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ t_data	init_data(int fd)
 	data.line = get_data(&data.nb_line, &data.elem_per_line, fd);
 	data.points = parse_points(data);
 	data.points_conic = parse_point_conic(data);
-	set_colour(&data);
+	set_colour_iso(&data);
+	set_colour_conic(&data);
 	data.beg_colour = init_colour(0, BEG_R, BEG_G, BEG_B);
 	data.zero_colour = init_colour(0, ZERO_R, ZERO_G, ZERO_B);
 	data.lines_conic = get_all_conic_lines(data);
