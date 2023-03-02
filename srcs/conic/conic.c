@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 22:21:36 by llevasse          #+#    #+#             */
-/*   Updated: 2023/03/01 19:18:31 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:48:33 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	render_conic(t_data *data)
 {
 	int	i;
 
-	reset_img(data);
+ 	reset_img(data);
 	ft_printf("switch to conic view\n");
 	if (!data->win_ptr)
 		return (1);

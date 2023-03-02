@@ -6,7 +6,7 @@
 /*   By: llevasse <llevasse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:55:30 by llevasse          #+#    #+#             */
-/*   Updated: 2023/03/01 19:46:20 by llevasse         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:47:47 by llevasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,14 @@ int	handle_input(int keysym, t_data *data)
 		reset_grid(data);
 	if (keysym == XK_p || keysym == XK_P)
 		print_grid_info(data);
-	if (keysym == XK_c || keysym == XK_C)
+	if ((keysym == XK_c || keysym == XK_C))
 		render_conic(data);
+	if ((keysym == XK_i || keysym == XK_I))
+	{
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+				data->img_isometric.mlx_img, 0, 0);
+		data->current_img = &data->img_isometric;
+	}
 	return (0);
 }
 
